@@ -12557,7 +12557,7 @@ Keep Prob Tests Passed.
 <span class="sd">    : num_outputs: The number of output that the new tensor should be.</span>
 <span class="sd">    : return: A 2-D tensor where the second dimension is num_outputs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">fully_connected</span><span class="p">(</span><span class="n">x_tensor</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">fully_connected</span><span class="p">(</span><span class="n">x_tensor</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">,</span> <span class="n">activation_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -12795,8 +12795,8 @@ Keep Prob Tests Passed.
 <span class="sd">    : cost: TensorFlow cost function</span>
 <span class="sd">    : accuracy: TensorFlow accuracy function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">feature_batch</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">label_batch</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.</span> <span class="p">})</span>
-    <span class="n">accur</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">feature_batch</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">label_batch</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.</span><span class="p">})</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">feature_batch</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">label_batch</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
+    <span class="n">accur</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">valid_features</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">valid_labels</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss: </span><span class="si">{:.4f}</span><span class="s1"> Accuracy: </span><span class="si">{:.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">accur</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
@@ -12828,13 +12828,13 @@ Keep Prob Tests Passed.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Tune Parameters</span>
 <span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1024</span>
-<span class="n">keep_probability</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">keep_probability</span> <span class="o">=</span> <span class="mf">0.85</span>
 </pre></div>
 
 </div>
@@ -12853,7 +12853,7 @@ Keep Prob Tests Passed.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -12888,7 +12888,107 @@ Keep Prob Tests Passed.
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Checking the Training on a Single Batch...
-Epoch 10, CIFAR-10 Batch 1:  Loss: 1.5996 Accuracy: 42.33%</pre>
+Epoch  1, CIFAR-10 Batch 1:  Loss: 2.2014 Accuracy: 18.14%
+Epoch  2, CIFAR-10 Batch 1:  Loss: 2.0423 Accuracy: 23.02%
+Epoch  3, CIFAR-10 Batch 1:  Loss: 1.9296 Accuracy: 27.74%
+Epoch  4, CIFAR-10 Batch 1:  Loss: 1.8502 Accuracy: 28.72%
+Epoch  5, CIFAR-10 Batch 1:  Loss: 1.8443 Accuracy: 30.40%
+Epoch  6, CIFAR-10 Batch 1:  Loss: 1.7583 Accuracy: 35.42%
+Epoch  7, CIFAR-10 Batch 1:  Loss: 1.6916 Accuracy: 35.76%
+Epoch  8, CIFAR-10 Batch 1:  Loss: 1.6606 Accuracy: 37.26%
+Epoch  9, CIFAR-10 Batch 1:  Loss: 1.5971 Accuracy: 38.92%
+Epoch 10, CIFAR-10 Batch 1:  Loss: 1.5502 Accuracy: 41.46%
+Epoch 11, CIFAR-10 Batch 1:  Loss: 1.5324 Accuracy: 41.64%
+Epoch 12, CIFAR-10 Batch 1:  Loss: 1.4919 Accuracy: 42.12%
+Epoch 13, CIFAR-10 Batch 1:  Loss: 1.4600 Accuracy: 42.90%
+Epoch 14, CIFAR-10 Batch 1:  Loss: 1.4326 Accuracy: 43.50%
+Epoch 15, CIFAR-10 Batch 1:  Loss: 1.4119 Accuracy: 43.50%
+Epoch 16, CIFAR-10 Batch 1:  Loss: 1.4085 Accuracy: 42.10%
+Epoch 17, CIFAR-10 Batch 1:  Loss: 1.3743 Accuracy: 44.08%
+Epoch 18, CIFAR-10 Batch 1:  Loss: 1.3358 Accuracy: 44.82%
+Epoch 19, CIFAR-10 Batch 1:  Loss: 1.3662 Accuracy: 45.06%
+Epoch 20, CIFAR-10 Batch 1:  Loss: 1.2964 Accuracy: 45.80%
+Epoch 21, CIFAR-10 Batch 1:  Loss: 1.2658 Accuracy: 45.46%
+Epoch 22, CIFAR-10 Batch 1:  Loss: 1.2533 Accuracy: 46.44%
+Epoch 23, CIFAR-10 Batch 1:  Loss: 1.2255 Accuracy: 46.74%
+Epoch 24, CIFAR-10 Batch 1:  Loss: 1.2405 Accuracy: 46.70%
+Epoch 25, CIFAR-10 Batch 1:  Loss: 1.2163 Accuracy: 46.96%
+Epoch 26, CIFAR-10 Batch 1:  Loss: 1.1918 Accuracy: 47.48%
+Epoch 27, CIFAR-10 Batch 1:  Loss: 1.1607 Accuracy: 47.80%
+Epoch 28, CIFAR-10 Batch 1:  Loss: 1.1418 Accuracy: 48.14%
+Epoch 29, CIFAR-10 Batch 1:  Loss: 1.1338 Accuracy: 48.18%
+Epoch 30, CIFAR-10 Batch 1:  Loss: 1.1048 Accuracy: 48.74%
+Epoch 31, CIFAR-10 Batch 1:  Loss: 1.1040 Accuracy: 48.84%
+Epoch 32, CIFAR-10 Batch 1:  Loss: 1.1124 Accuracy: 48.32%
+Epoch 33, CIFAR-10 Batch 1:  Loss: 1.0791 Accuracy: 47.82%
+Epoch 34, CIFAR-10 Batch 1:  Loss: 1.0517 Accuracy: 49.36%
+Epoch 35, CIFAR-10 Batch 1:  Loss: 1.1021 Accuracy: 48.50%
+Epoch 36, CIFAR-10 Batch 1:  Loss: 1.0122 Accuracy: 50.26%
+Epoch 37, CIFAR-10 Batch 1:  Loss: 1.0143 Accuracy: 50.12%
+Epoch 38, CIFAR-10 Batch 1:  Loss: 1.0535 Accuracy: 49.02%
+Epoch 39, CIFAR-10 Batch 1:  Loss: 0.9983 Accuracy: 50.20%
+Epoch 40, CIFAR-10 Batch 1:  Loss: 1.0195 Accuracy: 49.50%
+Epoch 41, CIFAR-10 Batch 1:  Loss: 1.0123 Accuracy: 49.18%
+Epoch 42, CIFAR-10 Batch 1:  Loss: 1.0105 Accuracy: 49.18%
+Epoch 43, CIFAR-10 Batch 1:  Loss: 1.0959 Accuracy: 47.20%
+Epoch 44, CIFAR-10 Batch 1:  Loss: 1.0336 Accuracy: 48.62%
+Epoch 45, CIFAR-10 Batch 1:  Loss: 1.0219 Accuracy: 48.70%
+Epoch 46, CIFAR-10 Batch 1:  Loss: 0.9670 Accuracy: 50.14%
+Epoch 47, CIFAR-10 Batch 1:  Loss: 0.9613 Accuracy: 49.94%
+Epoch 48, CIFAR-10 Batch 1:  Loss: 0.9307 Accuracy: 50.02%
+Epoch 49, CIFAR-10 Batch 1:  Loss: 0.9124 Accuracy: 49.70%
+Epoch 50, CIFAR-10 Batch 1:  Loss: 0.8931 Accuracy: 50.42%
+Epoch 51, CIFAR-10 Batch 1:  Loss: 0.8672 Accuracy: 50.84%
+Epoch 52, CIFAR-10 Batch 1:  Loss: 0.8625 Accuracy: 50.50%
+Epoch 53, CIFAR-10 Batch 1:  Loss: 0.8826 Accuracy: 50.70%
+Epoch 54, CIFAR-10 Batch 1:  Loss: 0.8686 Accuracy: 50.32%
+Epoch 55, CIFAR-10 Batch 1:  Loss: 0.8435 Accuracy: 51.16%
+Epoch 56, CIFAR-10 Batch 1:  Loss: 0.8169 Accuracy: 51.14%
+Epoch 57, CIFAR-10 Batch 1:  Loss: 0.8263 Accuracy: 50.72%
+Epoch 58, CIFAR-10 Batch 1:  Loss: 0.8232 Accuracy: 50.80%
+Epoch 59, CIFAR-10 Batch 1:  Loss: 0.8803 Accuracy: 50.26%
+Epoch 60, CIFAR-10 Batch 1:  Loss: 0.9099 Accuracy: 48.12%
+Epoch 61, CIFAR-10 Batch 1:  Loss: 0.8433 Accuracy: 50.78%
+Epoch 62, CIFAR-10 Batch 1:  Loss: 0.7848 Accuracy: 51.34%
+Epoch 63, CIFAR-10 Batch 1:  Loss: 0.7792 Accuracy: 51.32%
+Epoch 64, CIFAR-10 Batch 1:  Loss: 0.7574 Accuracy: 51.44%
+Epoch 65, CIFAR-10 Batch 1:  Loss: 0.7373 Accuracy: 51.48%
+Epoch 66, CIFAR-10 Batch 1:  Loss: 0.7264 Accuracy: 51.72%
+Epoch 67, CIFAR-10 Batch 1:  Loss: 0.7200 Accuracy: 51.30%
+Epoch 68, CIFAR-10 Batch 1:  Loss: 0.7111 Accuracy: 51.32%
+Epoch 69, CIFAR-10 Batch 1:  Loss: 0.7076 Accuracy: 51.58%
+Epoch 70, CIFAR-10 Batch 1:  Loss: 0.7128 Accuracy: 51.82%
+Epoch 71, CIFAR-10 Batch 1:  Loss: 0.7082 Accuracy: 51.22%
+Epoch 72, CIFAR-10 Batch 1:  Loss: 0.7263 Accuracy: 50.34%
+Epoch 73, CIFAR-10 Batch 1:  Loss: 0.7221 Accuracy: 49.84%
+Epoch 74, CIFAR-10 Batch 1:  Loss: 0.6846 Accuracy: 51.02%
+Epoch 75, CIFAR-10 Batch 1:  Loss: 0.6899 Accuracy: 51.10%
+Epoch 76, CIFAR-10 Batch 1:  Loss: 0.6976 Accuracy: 51.40%
+Epoch 77, CIFAR-10 Batch 1:  Loss: 0.7094 Accuracy: 50.54%
+Epoch 78, CIFAR-10 Batch 1:  Loss: 0.7920 Accuracy: 49.04%
+Epoch 79, CIFAR-10 Batch 1:  Loss: 0.7290 Accuracy: 49.90%
+Epoch 80, CIFAR-10 Batch 1:  Loss: 0.8080 Accuracy: 47.60%
+Epoch 81, CIFAR-10 Batch 1:  Loss: 0.7148 Accuracy: 50.10%
+Epoch 82, CIFAR-10 Batch 1:  Loss: 0.7230 Accuracy: 50.84%
+Epoch 83, CIFAR-10 Batch 1:  Loss: 0.7554 Accuracy: 50.68%
+Epoch 84, CIFAR-10 Batch 1:  Loss: 0.6906 Accuracy: 51.46%
+Epoch 85, CIFAR-10 Batch 1:  Loss: 0.7678 Accuracy: 49.74%
+Epoch 86, CIFAR-10 Batch 1:  Loss: 0.6953 Accuracy: 51.28%
+Epoch 87, CIFAR-10 Batch 1:  Loss: 0.6421 Accuracy: 50.86%
+Epoch 88, CIFAR-10 Batch 1:  Loss: 0.5904 Accuracy: 51.96%
+Epoch 89, CIFAR-10 Batch 1:  Loss: 0.5833 Accuracy: 51.08%
+Epoch 90, CIFAR-10 Batch 1:  Loss: 0.6187 Accuracy: 50.88%
+Epoch 91, CIFAR-10 Batch 1:  Loss: 0.6053 Accuracy: 51.22%
+Epoch 92, CIFAR-10 Batch 1:  Loss: 0.5902 Accuracy: 51.86%
+Epoch 93, CIFAR-10 Batch 1:  Loss: 0.5522 Accuracy: 51.78%
+Epoch 94, CIFAR-10 Batch 1:  Loss: 0.5692 Accuracy: 51.98%
+Epoch 95, CIFAR-10 Batch 1:  Loss: 0.5968 Accuracy: 51.08%
+Epoch 96, CIFAR-10 Batch 1:  Loss: 0.5562 Accuracy: 52.04%
+Epoch 97, CIFAR-10 Batch 1:  Loss: 0.5546 Accuracy: 51.14%
+Epoch 98, CIFAR-10 Batch 1:  Loss: 0.5782 Accuracy: 50.74%
+Epoch 99, CIFAR-10 Batch 1:  Loss: 0.5241 Accuracy: 51.34%
+Epoch 100, CIFAR-10 Batch 1:  Loss: 0.5184 Accuracy: 52.50%
+</pre>
 </div>
 </div>
 
@@ -12907,7 +13007,7 @@ Epoch 10, CIFAR-10 Batch 1:  Loss: 1.5996 Accuracy: 42.33%</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -12950,506 +13050,506 @@ Epoch 10, CIFAR-10 Batch 1:  Loss: 1.5996 Accuracy: 42.33%</pre>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training...
-Epoch  1, CIFAR-10 Batch 1:  Loss: 2.2341 Accuracy: 17.82%
-Epoch  1, CIFAR-10 Batch 2:  Loss: 2.1459 Accuracy: 22.52%
-Epoch  1, CIFAR-10 Batch 3:  Loss: 2.1302 Accuracy: 22.77%
-Epoch  1, CIFAR-10 Batch 4:  Loss: 2.0399 Accuracy: 27.10%
-Epoch  1, CIFAR-10 Batch 5:  Loss: 1.9823 Accuracy: 29.58%
-Epoch  2, CIFAR-10 Batch 1:  Loss: 1.9792 Accuracy: 30.57%
-Epoch  2, CIFAR-10 Batch 2:  Loss: 1.9174 Accuracy: 32.18%
-Epoch  2, CIFAR-10 Batch 3:  Loss: 1.8365 Accuracy: 35.40%
-Epoch  2, CIFAR-10 Batch 4:  Loss: 1.8097 Accuracy: 37.25%
-Epoch  2, CIFAR-10 Batch 5:  Loss: 1.7714 Accuracy: 39.11%
-Epoch  3, CIFAR-10 Batch 1:  Loss: 1.7255 Accuracy: 41.96%
-Epoch  3, CIFAR-10 Batch 2:  Loss: 1.7320 Accuracy: 37.25%
-Epoch  3, CIFAR-10 Batch 3:  Loss: 1.6051 Accuracy: 42.20%
-Epoch  3, CIFAR-10 Batch 4:  Loss: 1.5706 Accuracy: 45.17%
-Epoch  3, CIFAR-10 Batch 5:  Loss: 1.5790 Accuracy: 45.17%
-Epoch  4, CIFAR-10 Batch 1:  Loss: 1.5704 Accuracy: 43.81%
-Epoch  4, CIFAR-10 Batch 2:  Loss: 1.5785 Accuracy: 42.33%
-Epoch  4, CIFAR-10 Batch 3:  Loss: 1.4898 Accuracy: 45.79%
-Epoch  4, CIFAR-10 Batch 4:  Loss: 1.4837 Accuracy: 47.77%
-Epoch  4, CIFAR-10 Batch 5:  Loss: 1.4730 Accuracy: 48.27%
-Epoch  5, CIFAR-10 Batch 1:  Loss: 1.4790 Accuracy: 48.89%
-Epoch  5, CIFAR-10 Batch 2:  Loss: 1.4737 Accuracy: 45.42%
-Epoch  5, CIFAR-10 Batch 3:  Loss: 1.4031 Accuracy: 48.89%
-Epoch  5, CIFAR-10 Batch 4:  Loss: 1.3980 Accuracy: 50.62%
-Epoch  5, CIFAR-10 Batch 5:  Loss: 1.4027 Accuracy: 50.25%
-Epoch  6, CIFAR-10 Batch 1:  Loss: 1.3948 Accuracy: 50.12%
-Epoch  6, CIFAR-10 Batch 2:  Loss: 1.4036 Accuracy: 48.27%
-Epoch  6, CIFAR-10 Batch 3:  Loss: 1.3315 Accuracy: 50.87%
-Epoch  6, CIFAR-10 Batch 4:  Loss: 1.3487 Accuracy: 51.11%
-Epoch  6, CIFAR-10 Batch 5:  Loss: 1.3536 Accuracy: 51.98%
-Epoch  7, CIFAR-10 Batch 1:  Loss: 1.3782 Accuracy: 52.10%
-Epoch  7, CIFAR-10 Batch 2:  Loss: 1.3736 Accuracy: 48.64%
-Epoch  7, CIFAR-10 Batch 3:  Loss: 1.3192 Accuracy: 52.48%
-Epoch  7, CIFAR-10 Batch 4:  Loss: 1.3084 Accuracy: 54.33%
-Epoch  7, CIFAR-10 Batch 5:  Loss: 1.3029 Accuracy: 53.47%
-Epoch  8, CIFAR-10 Batch 1:  Loss: 1.3268 Accuracy: 51.49%
-Epoch  8, CIFAR-10 Batch 2:  Loss: 1.3417 Accuracy: 51.98%
-Epoch  8, CIFAR-10 Batch 3:  Loss: 1.2559 Accuracy: 53.84%
-Epoch  8, CIFAR-10 Batch 4:  Loss: 1.2636 Accuracy: 55.94%
-Epoch  8, CIFAR-10 Batch 5:  Loss: 1.2766 Accuracy: 55.07%
-Epoch  9, CIFAR-10 Batch 1:  Loss: 1.2881 Accuracy: 54.21%
-Epoch  9, CIFAR-10 Batch 2:  Loss: 1.3084 Accuracy: 51.11%
-Epoch  9, CIFAR-10 Batch 3:  Loss: 1.2249 Accuracy: 55.45%
-Epoch  9, CIFAR-10 Batch 4:  Loss: 1.2306 Accuracy: 57.43%
-Epoch  9, CIFAR-10 Batch 5:  Loss: 1.2414 Accuracy: 56.68%
-Epoch 10, CIFAR-10 Batch 1:  Loss: 1.2507 Accuracy: 55.82%
-Epoch 10, CIFAR-10 Batch 2:  Loss: 1.2569 Accuracy: 55.07%
-Epoch 10, CIFAR-10 Batch 3:  Loss: 1.1892 Accuracy: 56.68%
-Epoch 10, CIFAR-10 Batch 4:  Loss: 1.1962 Accuracy: 58.29%
-Epoch 10, CIFAR-10 Batch 5:  Loss: 1.2133 Accuracy: 56.93%
-Epoch 11, CIFAR-10 Batch 1:  Loss: 1.2309 Accuracy: 57.55%
-Epoch 11, CIFAR-10 Batch 2:  Loss: 1.2476 Accuracy: 54.95%
-Epoch 11, CIFAR-10 Batch 3:  Loss: 1.1656 Accuracy: 56.56%
-Epoch 11, CIFAR-10 Batch 4:  Loss: 1.1659 Accuracy: 60.64%
-Epoch 11, CIFAR-10 Batch 5:  Loss: 1.1771 Accuracy: 58.66%
-Epoch 12, CIFAR-10 Batch 1:  Loss: 1.1976 Accuracy: 57.55%
-Epoch 12, CIFAR-10 Batch 2:  Loss: 1.2086 Accuracy: 56.19%
-Epoch 12, CIFAR-10 Batch 3:  Loss: 1.1460 Accuracy: 57.18%
-Epoch 12, CIFAR-10 Batch 4:  Loss: 1.1539 Accuracy: 60.52%
-Epoch 12, CIFAR-10 Batch 5:  Loss: 1.1519 Accuracy: 59.28%
-Epoch 13, CIFAR-10 Batch 1:  Loss: 1.1979 Accuracy: 57.92%
-Epoch 13, CIFAR-10 Batch 2:  Loss: 1.1949 Accuracy: 55.82%
-Epoch 13, CIFAR-10 Batch 3:  Loss: 1.1529 Accuracy: 57.80%
-Epoch 13, CIFAR-10 Batch 4:  Loss: 1.1567 Accuracy: 59.90%
-Epoch 13, CIFAR-10 Batch 5:  Loss: 1.1563 Accuracy: 57.92%
-Epoch 14, CIFAR-10 Batch 1:  Loss: 1.2103 Accuracy: 58.79%
-Epoch 14, CIFAR-10 Batch 2:  Loss: 1.1698 Accuracy: 56.31%
-Epoch 14, CIFAR-10 Batch 3:  Loss: 1.1598 Accuracy: 58.17%
-Epoch 14, CIFAR-10 Batch 4:  Loss: 1.1400 Accuracy: 61.14%
-Epoch 14, CIFAR-10 Batch 5:  Loss: 1.0945 Accuracy: 62.62%
-Epoch 15, CIFAR-10 Batch 1:  Loss: 1.1355 Accuracy: 60.40%
-Epoch 15, CIFAR-10 Batch 2:  Loss: 1.1419 Accuracy: 58.04%
-Epoch 15, CIFAR-10 Batch 3:  Loss: 1.1312 Accuracy: 58.91%
-Epoch 15, CIFAR-10 Batch 4:  Loss: 1.0985 Accuracy: 62.13%
-Epoch 15, CIFAR-10 Batch 5:  Loss: 1.0965 Accuracy: 62.87%
-Epoch 16, CIFAR-10 Batch 1:  Loss: 1.1285 Accuracy: 60.89%
-Epoch 16, CIFAR-10 Batch 2:  Loss: 1.1172 Accuracy: 59.03%
-Epoch 16, CIFAR-10 Batch 3:  Loss: 1.0743 Accuracy: 61.51%
-Epoch 16, CIFAR-10 Batch 4:  Loss: 1.0729 Accuracy: 62.75%
-Epoch 16, CIFAR-10 Batch 5:  Loss: 1.0709 Accuracy: 63.49%
-Epoch 17, CIFAR-10 Batch 1:  Loss: 1.1101 Accuracy: 61.63%
-Epoch 17, CIFAR-10 Batch 2:  Loss: 1.1181 Accuracy: 59.28%
-Epoch 17, CIFAR-10 Batch 3:  Loss: 1.0732 Accuracy: 61.88%
-Epoch 17, CIFAR-10 Batch 4:  Loss: 1.0763 Accuracy: 63.99%
-Epoch 17, CIFAR-10 Batch 5:  Loss: 1.0551 Accuracy: 63.12%
-Epoch 18, CIFAR-10 Batch 1:  Loss: 1.0902 Accuracy: 62.38%
-Epoch 18, CIFAR-10 Batch 2:  Loss: 1.0805 Accuracy: 59.53%
-Epoch 18, CIFAR-10 Batch 3:  Loss: 1.0301 Accuracy: 63.12%
-Epoch 18, CIFAR-10 Batch 4:  Loss: 1.0362 Accuracy: 64.48%
-Epoch 18, CIFAR-10 Batch 5:  Loss: 1.0602 Accuracy: 62.50%
-Epoch 19, CIFAR-10 Batch 1:  Loss: 1.0989 Accuracy: 63.12%
-Epoch 19, CIFAR-10 Batch 2:  Loss: 1.0868 Accuracy: 59.53%
-Epoch 19, CIFAR-10 Batch 3:  Loss: 1.0071 Accuracy: 64.11%
-Epoch 19, CIFAR-10 Batch 4:  Loss: 1.0178 Accuracy: 64.85%
-Epoch 19, CIFAR-10 Batch 5:  Loss: 1.0198 Accuracy: 64.48%
-Epoch 20, CIFAR-10 Batch 1:  Loss: 1.0684 Accuracy: 63.24%
-Epoch 20, CIFAR-10 Batch 2:  Loss: 1.0481 Accuracy: 62.38%
-Epoch 20, CIFAR-10 Batch 3:  Loss: 0.9978 Accuracy: 64.48%
-Epoch 20, CIFAR-10 Batch 4:  Loss: 0.9955 Accuracy: 65.72%
-Epoch 20, CIFAR-10 Batch 5:  Loss: 1.0016 Accuracy: 66.21%
-Epoch 21, CIFAR-10 Batch 1:  Loss: 1.0323 Accuracy: 62.62%
-Epoch 21, CIFAR-10 Batch 2:  Loss: 1.0511 Accuracy: 62.13%
-Epoch 21, CIFAR-10 Batch 3:  Loss: 0.9808 Accuracy: 65.47%
-Epoch 21, CIFAR-10 Batch 4:  Loss: 0.9640 Accuracy: 66.21%
-Epoch 21, CIFAR-10 Batch 5:  Loss: 0.9816 Accuracy: 66.83%
-Epoch 22, CIFAR-10 Batch 1:  Loss: 1.0282 Accuracy: 63.99%
-Epoch 22, CIFAR-10 Batch 2:  Loss: 1.0352 Accuracy: 64.36%
-Epoch 22, CIFAR-10 Batch 3:  Loss: 0.9612 Accuracy: 66.46%
-Epoch 22, CIFAR-10 Batch 4:  Loss: 0.9626 Accuracy: 65.97%
-Epoch 22, CIFAR-10 Batch 5:  Loss: 0.9621 Accuracy: 67.57%
-Epoch 23, CIFAR-10 Batch 1:  Loss: 1.0146 Accuracy: 64.85%
-Epoch 23, CIFAR-10 Batch 2:  Loss: 1.0338 Accuracy: 62.87%
-Epoch 23, CIFAR-10 Batch 3:  Loss: 0.9755 Accuracy: 65.35%
-Epoch 23, CIFAR-10 Batch 4:  Loss: 0.9525 Accuracy: 67.08%
-Epoch 23, CIFAR-10 Batch 5:  Loss: 0.9484 Accuracy: 67.57%
-Epoch 24, CIFAR-10 Batch 1:  Loss: 0.9939 Accuracy: 65.10%
-Epoch 24, CIFAR-10 Batch 2:  Loss: 0.9966 Accuracy: 63.61%
-Epoch 24, CIFAR-10 Batch 3:  Loss: 0.9785 Accuracy: 65.72%
-Epoch 24, CIFAR-10 Batch 4:  Loss: 0.9787 Accuracy: 65.10%
-Epoch 24, CIFAR-10 Batch 5:  Loss: 0.9503 Accuracy: 67.20%
-Epoch 25, CIFAR-10 Batch 1:  Loss: 0.9791 Accuracy: 66.34%
-Epoch 25, CIFAR-10 Batch 2:  Loss: 0.9586 Accuracy: 66.21%
-Epoch 25, CIFAR-10 Batch 3:  Loss: 0.9404 Accuracy: 67.33%
-Epoch 25, CIFAR-10 Batch 4:  Loss: 0.9585 Accuracy: 65.97%
-Epoch 25, CIFAR-10 Batch 5:  Loss: 0.9406 Accuracy: 67.57%
-Epoch 26, CIFAR-10 Batch 1:  Loss: 0.9558 Accuracy: 66.83%
-Epoch 26, CIFAR-10 Batch 2:  Loss: 0.9455 Accuracy: 66.83%
-Epoch 26, CIFAR-10 Batch 3:  Loss: 0.9231 Accuracy: 67.95%
-Epoch 26, CIFAR-10 Batch 4:  Loss: 0.9392 Accuracy: 66.71%
-Epoch 26, CIFAR-10 Batch 5:  Loss: 0.9478 Accuracy: 67.82%
-Epoch 27, CIFAR-10 Batch 1:  Loss: 0.9509 Accuracy: 66.71%
-Epoch 27, CIFAR-10 Batch 2:  Loss: 0.9583 Accuracy: 66.09%
-Epoch 27, CIFAR-10 Batch 3:  Loss: 0.9030 Accuracy: 67.70%
-Epoch 27, CIFAR-10 Batch 4:  Loss: 0.9012 Accuracy: 68.56%
-Epoch 27, CIFAR-10 Batch 5:  Loss: 0.9203 Accuracy: 68.32%
-Epoch 28, CIFAR-10 Batch 1:  Loss: 0.9386 Accuracy: 68.44%
-Epoch 28, CIFAR-10 Batch 2:  Loss: 0.9372 Accuracy: 67.57%
-Epoch 28, CIFAR-10 Batch 3:  Loss: 0.8927 Accuracy: 69.18%
-Epoch 28, CIFAR-10 Batch 4:  Loss: 0.8986 Accuracy: 68.94%
-Epoch 28, CIFAR-10 Batch 5:  Loss: 0.9117 Accuracy: 68.07%
-Epoch 29, CIFAR-10 Batch 1:  Loss: 0.9547 Accuracy: 67.08%
-Epoch 29, CIFAR-10 Batch 2:  Loss: 0.9443 Accuracy: 66.58%
-Epoch 29, CIFAR-10 Batch 3:  Loss: 0.9591 Accuracy: 66.96%
-Epoch 29, CIFAR-10 Batch 4:  Loss: 0.9228 Accuracy: 66.83%
-Epoch 29, CIFAR-10 Batch 5:  Loss: 0.9018 Accuracy: 69.93%
-Epoch 30, CIFAR-10 Batch 1:  Loss: 0.9451 Accuracy: 67.08%
-Epoch 30, CIFAR-10 Batch 2:  Loss: 0.9278 Accuracy: 67.20%
-Epoch 30, CIFAR-10 Batch 3:  Loss: 0.9327 Accuracy: 67.45%
-Epoch 30, CIFAR-10 Batch 4:  Loss: 0.8857 Accuracy: 68.81%
-Epoch 30, CIFAR-10 Batch 5:  Loss: 0.9059 Accuracy: 68.07%
-Epoch 31, CIFAR-10 Batch 1:  Loss: 0.9293 Accuracy: 67.95%
-Epoch 31, CIFAR-10 Batch 2:  Loss: 0.9001 Accuracy: 68.56%
-Epoch 31, CIFAR-10 Batch 3:  Loss: 0.9018 Accuracy: 67.70%
-Epoch 31, CIFAR-10 Batch 4:  Loss: 0.8828 Accuracy: 68.44%
-Epoch 31, CIFAR-10 Batch 5:  Loss: 0.8855 Accuracy: 69.06%
-Epoch 32, CIFAR-10 Batch 1:  Loss: 0.9009 Accuracy: 68.69%
-Epoch 32, CIFAR-10 Batch 2:  Loss: 0.8708 Accuracy: 69.55%
-Epoch 32, CIFAR-10 Batch 3:  Loss: 0.8760 Accuracy: 69.55%
-Epoch 32, CIFAR-10 Batch 4:  Loss: 0.8323 Accuracy: 71.16%
-Epoch 32, CIFAR-10 Batch 5:  Loss: 0.8690 Accuracy: 70.30%
-Epoch 33, CIFAR-10 Batch 1:  Loss: 0.8915 Accuracy: 69.18%
-Epoch 33, CIFAR-10 Batch 2:  Loss: 0.8809 Accuracy: 68.81%
-Epoch 33, CIFAR-10 Batch 3:  Loss: 0.8501 Accuracy: 69.68%
-Epoch 33, CIFAR-10 Batch 4:  Loss: 0.7986 Accuracy: 72.77%
-Epoch 33, CIFAR-10 Batch 5:  Loss: 0.8333 Accuracy: 70.42%
-Epoch 34, CIFAR-10 Batch 1:  Loss: 0.8859 Accuracy: 70.05%
-Epoch 34, CIFAR-10 Batch 2:  Loss: 0.8666 Accuracy: 68.94%
-Epoch 34, CIFAR-10 Batch 3:  Loss: 0.8618 Accuracy: 69.68%
-Epoch 34, CIFAR-10 Batch 4:  Loss: 0.7915 Accuracy: 73.02%
-Epoch 34, CIFAR-10 Batch 5:  Loss: 0.8412 Accuracy: 70.30%
-Epoch 35, CIFAR-10 Batch 1:  Loss: 0.9055 Accuracy: 68.07%
-Epoch 35, CIFAR-10 Batch 2:  Loss: 0.8718 Accuracy: 68.81%
-Epoch 35, CIFAR-10 Batch 3:  Loss: 0.8490 Accuracy: 69.93%
-Epoch 35, CIFAR-10 Batch 4:  Loss: 0.8233 Accuracy: 71.91%
-Epoch 35, CIFAR-10 Batch 5:  Loss: 0.8354 Accuracy: 70.79%
-Epoch 36, CIFAR-10 Batch 1:  Loss: 0.8689 Accuracy: 70.30%
-Epoch 36, CIFAR-10 Batch 2:  Loss: 0.8355 Accuracy: 70.92%
-Epoch 36, CIFAR-10 Batch 3:  Loss: 0.8506 Accuracy: 68.56%
-Epoch 36, CIFAR-10 Batch 4:  Loss: 0.7943 Accuracy: 72.90%
-Epoch 36, CIFAR-10 Batch 5:  Loss: 0.8181 Accuracy: 70.67%
-Epoch 37, CIFAR-10 Batch 1:  Loss: 0.8492 Accuracy: 70.42%
-Epoch 37, CIFAR-10 Batch 2:  Loss: 0.8526 Accuracy: 69.80%
-Epoch 37, CIFAR-10 Batch 3:  Loss: 0.8602 Accuracy: 69.93%
-Epoch 37, CIFAR-10 Batch 4:  Loss: 0.7852 Accuracy: 72.90%
-Epoch 37, CIFAR-10 Batch 5:  Loss: 0.8106 Accuracy: 71.04%
-Epoch 38, CIFAR-10 Batch 1:  Loss: 0.8415 Accuracy: 70.30%
-Epoch 38, CIFAR-10 Batch 2:  Loss: 0.8611 Accuracy: 68.94%
-Epoch 38, CIFAR-10 Batch 3:  Loss: 0.8367 Accuracy: 70.67%
-Epoch 38, CIFAR-10 Batch 4:  Loss: 0.7646 Accuracy: 73.51%
-Epoch 38, CIFAR-10 Batch 5:  Loss: 0.7867 Accuracy: 73.39%
-Epoch 39, CIFAR-10 Batch 1:  Loss: 0.8147 Accuracy: 71.78%
-Epoch 39, CIFAR-10 Batch 2:  Loss: 0.8407 Accuracy: 71.41%
-Epoch 39, CIFAR-10 Batch 3:  Loss: 0.8426 Accuracy: 71.04%
-Epoch 39, CIFAR-10 Batch 4:  Loss: 0.7728 Accuracy: 73.39%
-Epoch 39, CIFAR-10 Batch 5:  Loss: 0.7901 Accuracy: 73.76%
-Epoch 40, CIFAR-10 Batch 1:  Loss: 0.8114 Accuracy: 71.91%
-Epoch 40, CIFAR-10 Batch 2:  Loss: 0.8236 Accuracy: 71.53%
-Epoch 40, CIFAR-10 Batch 3:  Loss: 0.8543 Accuracy: 71.53%
-Epoch 40, CIFAR-10 Batch 4:  Loss: 0.7875 Accuracy: 71.04%
-Epoch 40, CIFAR-10 Batch 5:  Loss: 0.7895 Accuracy: 73.14%
-Epoch 41, CIFAR-10 Batch 1:  Loss: 0.8038 Accuracy: 72.65%
-Epoch 41, CIFAR-10 Batch 2:  Loss: 0.8109 Accuracy: 70.67%
-Epoch 41, CIFAR-10 Batch 3:  Loss: 0.8381 Accuracy: 72.03%
-Epoch 41, CIFAR-10 Batch 4:  Loss: 0.7751 Accuracy: 73.89%
-Epoch 41, CIFAR-10 Batch 5:  Loss: 0.7637 Accuracy: 74.75%
-Epoch 42, CIFAR-10 Batch 1:  Loss: 0.8115 Accuracy: 72.77%
-Epoch 42, CIFAR-10 Batch 2:  Loss: 0.7837 Accuracy: 71.91%
-Epoch 42, CIFAR-10 Batch 3:  Loss: 0.8160 Accuracy: 72.15%
-Epoch 42, CIFAR-10 Batch 4:  Loss: 0.7908 Accuracy: 70.79%
-Epoch 42, CIFAR-10 Batch 5:  Loss: 0.7766 Accuracy: 74.13%
-Epoch 43, CIFAR-10 Batch 1:  Loss: 0.8060 Accuracy: 71.16%
-Epoch 43, CIFAR-10 Batch 2:  Loss: 0.8088 Accuracy: 72.65%
-Epoch 43, CIFAR-10 Batch 3:  Loss: 0.7640 Accuracy: 73.51%
-Epoch 43, CIFAR-10 Batch 4:  Loss: 0.7436 Accuracy: 73.51%
-Epoch 43, CIFAR-10 Batch 5:  Loss: 0.7554 Accuracy: 74.01%
-Epoch 44, CIFAR-10 Batch 1:  Loss: 0.7695 Accuracy: 73.64%
-Epoch 44, CIFAR-10 Batch 2:  Loss: 0.8174 Accuracy: 72.15%
-Epoch 44, CIFAR-10 Batch 3:  Loss: 0.7857 Accuracy: 72.03%
-Epoch 44, CIFAR-10 Batch 4:  Loss: 0.8037 Accuracy: 70.92%
-Epoch 44, CIFAR-10 Batch 5:  Loss: 0.7848 Accuracy: 73.02%
-Epoch 45, CIFAR-10 Batch 1:  Loss: 0.7937 Accuracy: 72.28%
-Epoch 45, CIFAR-10 Batch 2:  Loss: 0.7761 Accuracy: 70.79%
-Epoch 45, CIFAR-10 Batch 3:  Loss: 0.8143 Accuracy: 72.03%
-Epoch 45, CIFAR-10 Batch 4:  Loss: 0.8156 Accuracy: 70.17%
-Epoch 45, CIFAR-10 Batch 5:  Loss: 0.8207 Accuracy: 70.42%
-Epoch 46, CIFAR-10 Batch 1:  Loss: 0.8102 Accuracy: 71.04%
-Epoch 46, CIFAR-10 Batch 2:  Loss: 0.7984 Accuracy: 69.55%
-Epoch 46, CIFAR-10 Batch 3:  Loss: 0.7924 Accuracy: 71.41%
-Epoch 46, CIFAR-10 Batch 4:  Loss: 0.7946 Accuracy: 72.15%
-Epoch 46, CIFAR-10 Batch 5:  Loss: 0.7966 Accuracy: 72.52%
-Epoch 47, CIFAR-10 Batch 1:  Loss: 0.7630 Accuracy: 72.65%
-Epoch 47, CIFAR-10 Batch 2:  Loss: 0.7669 Accuracy: 73.02%
-Epoch 47, CIFAR-10 Batch 3:  Loss: 0.7441 Accuracy: 73.39%
-Epoch 47, CIFAR-10 Batch 4:  Loss: 0.7647 Accuracy: 71.41%
-Epoch 47, CIFAR-10 Batch 5:  Loss: 0.7492 Accuracy: 75.25%
-Epoch 48, CIFAR-10 Batch 1:  Loss: 0.7664 Accuracy: 72.90%
-Epoch 48, CIFAR-10 Batch 2:  Loss: 0.7386 Accuracy: 73.02%
-Epoch 48, CIFAR-10 Batch 3:  Loss: 0.7553 Accuracy: 72.90%
-Epoch 48, CIFAR-10 Batch 4:  Loss: 0.7821 Accuracy: 72.15%
-Epoch 48, CIFAR-10 Batch 5:  Loss: 0.7657 Accuracy: 74.75%
-Epoch 49, CIFAR-10 Batch 1:  Loss: 0.7704 Accuracy: 72.40%
-Epoch 49, CIFAR-10 Batch 2:  Loss: 0.7321 Accuracy: 74.13%
-Epoch 49, CIFAR-10 Batch 3:  Loss: 0.7157 Accuracy: 73.02%
-Epoch 49, CIFAR-10 Batch 4:  Loss: 0.7949 Accuracy: 71.41%
-Epoch 49, CIFAR-10 Batch 5:  Loss: 0.7440 Accuracy: 75.74%
-Epoch 50, CIFAR-10 Batch 1:  Loss: 0.7547 Accuracy: 73.14%
-Epoch 50, CIFAR-10 Batch 2:  Loss: 0.7324 Accuracy: 74.50%
-Epoch 50, CIFAR-10 Batch 3:  Loss: 0.7133 Accuracy: 74.63%
-Epoch 50, CIFAR-10 Batch 4:  Loss: 0.7645 Accuracy: 71.91%
-Epoch 50, CIFAR-10 Batch 5:  Loss: 0.7304 Accuracy: 74.88%
-Epoch 51, CIFAR-10 Batch 1:  Loss: 0.7474 Accuracy: 74.50%
-Epoch 51, CIFAR-10 Batch 2:  Loss: 0.7252 Accuracy: 75.00%
-Epoch 51, CIFAR-10 Batch 3:  Loss: 0.7194 Accuracy: 75.37%
-Epoch 51, CIFAR-10 Batch 4:  Loss: 0.7707 Accuracy: 72.15%
-Epoch 51, CIFAR-10 Batch 5:  Loss: 0.7764 Accuracy: 71.66%
-Epoch 52, CIFAR-10 Batch 1:  Loss: 0.7905 Accuracy: 72.40%
-Epoch 52, CIFAR-10 Batch 2:  Loss: 0.7315 Accuracy: 74.50%
-Epoch 52, CIFAR-10 Batch 3:  Loss: 0.7212 Accuracy: 74.13%
-Epoch 52, CIFAR-10 Batch 4:  Loss: 0.7367 Accuracy: 73.02%
-Epoch 52, CIFAR-10 Batch 5:  Loss: 0.7498 Accuracy: 73.27%
-Epoch 53, CIFAR-10 Batch 1:  Loss: 0.7535 Accuracy: 73.89%
-Epoch 53, CIFAR-10 Batch 2:  Loss: 0.7135 Accuracy: 74.75%
-Epoch 53, CIFAR-10 Batch 3:  Loss: 0.7047 Accuracy: 74.38%
-Epoch 53, CIFAR-10 Batch 4:  Loss: 0.7760 Accuracy: 73.27%
-Epoch 53, CIFAR-10 Batch 5:  Loss: 0.7753 Accuracy: 71.91%
-Epoch 54, CIFAR-10 Batch 1:  Loss: 0.7777 Accuracy: 73.39%
-Epoch 54, CIFAR-10 Batch 2:  Loss: 0.7415 Accuracy: 74.01%
-Epoch 54, CIFAR-10 Batch 3:  Loss: 0.7334 Accuracy: 73.39%
-Epoch 54, CIFAR-10 Batch 4:  Loss: 0.7507 Accuracy: 74.38%
-Epoch 54, CIFAR-10 Batch 5:  Loss: 0.7340 Accuracy: 74.13%
-Epoch 55, CIFAR-10 Batch 1:  Loss: 0.7368 Accuracy: 73.39%
-Epoch 55, CIFAR-10 Batch 2:  Loss: 0.7307 Accuracy: 74.38%
-Epoch 55, CIFAR-10 Batch 3:  Loss: 0.7438 Accuracy: 72.77%
-Epoch 55, CIFAR-10 Batch 4:  Loss: 0.7488 Accuracy: 74.75%
-Epoch 55, CIFAR-10 Batch 5:  Loss: 0.7302 Accuracy: 74.88%
-Epoch 56, CIFAR-10 Batch 1:  Loss: 0.7540 Accuracy: 74.26%
-Epoch 56, CIFAR-10 Batch 2:  Loss: 0.7221 Accuracy: 76.73%
-Epoch 56, CIFAR-10 Batch 3:  Loss: 0.7263 Accuracy: 72.40%
-Epoch 56, CIFAR-10 Batch 4:  Loss: 0.7159 Accuracy: 77.10%
-Epoch 56, CIFAR-10 Batch 5:  Loss: 0.7032 Accuracy: 76.61%
-Epoch 57, CIFAR-10 Batch 1:  Loss: 0.7152 Accuracy: 75.37%
-Epoch 57, CIFAR-10 Batch 2:  Loss: 0.7333 Accuracy: 73.39%
-Epoch 57, CIFAR-10 Batch 3:  Loss: 0.7020 Accuracy: 75.12%
-Epoch 57, CIFAR-10 Batch 4:  Loss: 0.7135 Accuracy: 76.98%
-Epoch 57, CIFAR-10 Batch 5:  Loss: 0.6868 Accuracy: 77.60%
-Epoch 58, CIFAR-10 Batch 1:  Loss: 0.7248 Accuracy: 74.50%
-Epoch 58, CIFAR-10 Batch 2:  Loss: 0.7438 Accuracy: 73.14%
-Epoch 58, CIFAR-10 Batch 3:  Loss: 0.7069 Accuracy: 73.51%
-Epoch 58, CIFAR-10 Batch 4:  Loss: 0.6900 Accuracy: 78.34%
-Epoch 58, CIFAR-10 Batch 5:  Loss: 0.6755 Accuracy: 77.10%
-Epoch 59, CIFAR-10 Batch 1:  Loss: 0.7006 Accuracy: 75.12%
-Epoch 59, CIFAR-10 Batch 2:  Loss: 0.7009 Accuracy: 75.25%
-Epoch 59, CIFAR-10 Batch 3:  Loss: 0.7135 Accuracy: 74.01%
-Epoch 59, CIFAR-10 Batch 4:  Loss: 0.6910 Accuracy: 77.10%
-Epoch 59, CIFAR-10 Batch 5:  Loss: 0.6824 Accuracy: 76.98%
-Epoch 60, CIFAR-10 Batch 1:  Loss: 0.6873 Accuracy: 76.98%
-Epoch 60, CIFAR-10 Batch 2:  Loss: 0.6889 Accuracy: 75.87%
-Epoch 60, CIFAR-10 Batch 3:  Loss: 0.7042 Accuracy: 74.50%
-Epoch 60, CIFAR-10 Batch 4:  Loss: 0.7055 Accuracy: 76.36%
-Epoch 60, CIFAR-10 Batch 5:  Loss: 0.6748 Accuracy: 76.98%
-Epoch 61, CIFAR-10 Batch 1:  Loss: 0.6798 Accuracy: 76.86%
-Epoch 61, CIFAR-10 Batch 2:  Loss: 0.6688 Accuracy: 77.23%
-Epoch 61, CIFAR-10 Batch 3:  Loss: 0.7269 Accuracy: 74.38%
-Epoch 61, CIFAR-10 Batch 4:  Loss: 0.7247 Accuracy: 77.60%
-Epoch 61, CIFAR-10 Batch 5:  Loss: 0.7139 Accuracy: 76.11%
-Epoch 62, CIFAR-10 Batch 1:  Loss: 0.7204 Accuracy: 76.61%
-Epoch 62, CIFAR-10 Batch 2:  Loss: 0.6866 Accuracy: 75.74%
-Epoch 62, CIFAR-10 Batch 3:  Loss: 0.7197 Accuracy: 73.02%
-Epoch 62, CIFAR-10 Batch 4:  Loss: 0.7359 Accuracy: 76.86%
-Epoch 62, CIFAR-10 Batch 5:  Loss: 0.7326 Accuracy: 75.99%
-Epoch 63, CIFAR-10 Batch 1:  Loss: 0.7302 Accuracy: 76.49%
-Epoch 63, CIFAR-10 Batch 2:  Loss: 0.6995 Accuracy: 74.75%
-Epoch 63, CIFAR-10 Batch 3:  Loss: 0.6613 Accuracy: 75.62%
-Epoch 63, CIFAR-10 Batch 4:  Loss: 0.6776 Accuracy: 77.85%
-Epoch 63, CIFAR-10 Batch 5:  Loss: 0.6665 Accuracy: 77.10%
-Epoch 64, CIFAR-10 Batch 1:  Loss: 0.6735 Accuracy: 77.35%
-Epoch 64, CIFAR-10 Batch 2:  Loss: 0.6800 Accuracy: 74.75%
-Epoch 64, CIFAR-10 Batch 3:  Loss: 0.6510 Accuracy: 77.60%
-Epoch 64, CIFAR-10 Batch 4:  Loss: 0.6514 Accuracy: 78.71%
-Epoch 64, CIFAR-10 Batch 5:  Loss: 0.6770 Accuracy: 76.36%
-Epoch 65, CIFAR-10 Batch 1:  Loss: 0.6793 Accuracy: 77.60%
-Epoch 65, CIFAR-10 Batch 2:  Loss: 0.6545 Accuracy: 75.74%
-Epoch 65, CIFAR-10 Batch 3:  Loss: 0.6482 Accuracy: 76.11%
-Epoch 65, CIFAR-10 Batch 4:  Loss: 0.6296 Accuracy: 79.08%
-Epoch 65, CIFAR-10 Batch 5:  Loss: 0.6371 Accuracy: 77.85%
-Epoch 66, CIFAR-10 Batch 1:  Loss: 0.6629 Accuracy: 77.72%
-Epoch 66, CIFAR-10 Batch 2:  Loss: 0.6409 Accuracy: 76.86%
-Epoch 66, CIFAR-10 Batch 3:  Loss: 0.6442 Accuracy: 76.86%
-Epoch 66, CIFAR-10 Batch 4:  Loss: 0.6265 Accuracy: 79.08%
-Epoch 66, CIFAR-10 Batch 5:  Loss: 0.6395 Accuracy: 77.72%
-Epoch 67, CIFAR-10 Batch 1:  Loss: 0.6861 Accuracy: 76.73%
-Epoch 67, CIFAR-10 Batch 2:  Loss: 0.6706 Accuracy: 75.74%
-Epoch 67, CIFAR-10 Batch 3:  Loss: 0.6394 Accuracy: 77.72%
-Epoch 67, CIFAR-10 Batch 4:  Loss: 0.6294 Accuracy: 78.84%
-Epoch 67, CIFAR-10 Batch 5:  Loss: 0.6513 Accuracy: 77.35%
-Epoch 68, CIFAR-10 Batch 1:  Loss: 0.7001 Accuracy: 76.24%
-Epoch 68, CIFAR-10 Batch 2:  Loss: 0.6919 Accuracy: 74.63%
-Epoch 68, CIFAR-10 Batch 3:  Loss: 0.6406 Accuracy: 76.86%
-Epoch 68, CIFAR-10 Batch 4:  Loss: 0.6350 Accuracy: 78.59%
-Epoch 68, CIFAR-10 Batch 5:  Loss: 0.6416 Accuracy: 78.22%
-Epoch 69, CIFAR-10 Batch 1:  Loss: 0.6807 Accuracy: 78.59%
-Epoch 69, CIFAR-10 Batch 2:  Loss: 0.6545 Accuracy: 76.73%
-Epoch 69, CIFAR-10 Batch 3:  Loss: 0.6468 Accuracy: 76.98%
-Epoch 69, CIFAR-10 Batch 4:  Loss: 0.6167 Accuracy: 79.33%
-Epoch 69, CIFAR-10 Batch 5:  Loss: 0.6212 Accuracy: 79.46%
-Epoch 70, CIFAR-10 Batch 1:  Loss: 0.6394 Accuracy: 79.70%
-Epoch 70, CIFAR-10 Batch 2:  Loss: 0.6175 Accuracy: 77.85%
-Epoch 70, CIFAR-10 Batch 3:  Loss: 0.6066 Accuracy: 77.72%
-Epoch 70, CIFAR-10 Batch 4:  Loss: 0.6001 Accuracy: 79.95%
-Epoch 70, CIFAR-10 Batch 5:  Loss: 0.6194 Accuracy: 78.84%
-Epoch 71, CIFAR-10 Batch 1:  Loss: 0.6344 Accuracy: 80.20%
-Epoch 71, CIFAR-10 Batch 2:  Loss: 0.5920 Accuracy: 80.69%
-Epoch 71, CIFAR-10 Batch 3:  Loss: 0.5961 Accuracy: 79.21%
-Epoch 71, CIFAR-10 Batch 4:  Loss: 0.6044 Accuracy: 79.33%
-Epoch 71, CIFAR-10 Batch 5:  Loss: 0.6045 Accuracy: 79.70%
-Epoch 72, CIFAR-10 Batch 1:  Loss: 0.6314 Accuracy: 79.95%
-Epoch 72, CIFAR-10 Batch 2:  Loss: 0.5996 Accuracy: 78.34%
-Epoch 72, CIFAR-10 Batch 3:  Loss: 0.5873 Accuracy: 79.46%
-Epoch 72, CIFAR-10 Batch 4:  Loss: 0.5931 Accuracy: 80.07%
-Epoch 72, CIFAR-10 Batch 5:  Loss: 0.6078 Accuracy: 79.21%
-Epoch 73, CIFAR-10 Batch 1:  Loss: 0.6231 Accuracy: 79.95%
-Epoch 73, CIFAR-10 Batch 2:  Loss: 0.6102 Accuracy: 79.21%
-Epoch 73, CIFAR-10 Batch 3:  Loss: 0.6197 Accuracy: 77.85%
-Epoch 73, CIFAR-10 Batch 4:  Loss: 0.5873 Accuracy: 80.20%
-Epoch 73, CIFAR-10 Batch 5:  Loss: 0.6073 Accuracy: 80.07%
-Epoch 74, CIFAR-10 Batch 1:  Loss: 0.6373 Accuracy: 78.96%
-Epoch 74, CIFAR-10 Batch 2:  Loss: 0.6076 Accuracy: 79.08%
-Epoch 74, CIFAR-10 Batch 3:  Loss: 0.5819 Accuracy: 79.58%
-Epoch 74, CIFAR-10 Batch 4:  Loss: 0.5580 Accuracy: 82.05%
-Epoch 74, CIFAR-10 Batch 5:  Loss: 0.5823 Accuracy: 80.20%
-Epoch 75, CIFAR-10 Batch 1:  Loss: 0.6183 Accuracy: 80.45%
-Epoch 75, CIFAR-10 Batch 2:  Loss: 0.6049 Accuracy: 78.59%
-Epoch 75, CIFAR-10 Batch 3:  Loss: 0.5785 Accuracy: 78.96%
-Epoch 75, CIFAR-10 Batch 4:  Loss: 0.5686 Accuracy: 80.57%
-Epoch 75, CIFAR-10 Batch 5:  Loss: 0.5903 Accuracy: 80.20%
-Epoch 76, CIFAR-10 Batch 1:  Loss: 0.6123 Accuracy: 80.45%
-Epoch 76, CIFAR-10 Batch 2:  Loss: 0.5785 Accuracy: 80.07%
-Epoch 76, CIFAR-10 Batch 3:  Loss: 0.5616 Accuracy: 80.57%
-Epoch 76, CIFAR-10 Batch 4:  Loss: 0.5704 Accuracy: 81.31%
-Epoch 76, CIFAR-10 Batch 5:  Loss: 0.6111 Accuracy: 79.46%
-Epoch 77, CIFAR-10 Batch 1:  Loss: 0.5961 Accuracy: 80.69%
-Epoch 77, CIFAR-10 Batch 2:  Loss: 0.5777 Accuracy: 79.70%
-Epoch 77, CIFAR-10 Batch 3:  Loss: 0.5728 Accuracy: 80.45%
-Epoch 77, CIFAR-10 Batch 4:  Loss: 0.6127 Accuracy: 79.70%
-Epoch 77, CIFAR-10 Batch 5:  Loss: 0.6327 Accuracy: 78.09%
-Epoch 78, CIFAR-10 Batch 1:  Loss: 0.6293 Accuracy: 79.08%
-Epoch 78, CIFAR-10 Batch 2:  Loss: 0.5865 Accuracy: 79.70%
-Epoch 78, CIFAR-10 Batch 3:  Loss: 0.5468 Accuracy: 80.94%
-Epoch 78, CIFAR-10 Batch 4:  Loss: 0.5874 Accuracy: 80.07%
-Epoch 78, CIFAR-10 Batch 5:  Loss: 0.6200 Accuracy: 78.71%
-Epoch 79, CIFAR-10 Batch 1:  Loss: 0.5988 Accuracy: 81.44%
-Epoch 79, CIFAR-10 Batch 2:  Loss: 0.6134 Accuracy: 76.49%
-Epoch 79, CIFAR-10 Batch 3:  Loss: 0.5821 Accuracy: 79.58%
-Epoch 79, CIFAR-10 Batch 4:  Loss: 0.6029 Accuracy: 79.95%
-Epoch 79, CIFAR-10 Batch 5:  Loss: 0.6325 Accuracy: 78.22%
-Epoch 80, CIFAR-10 Batch 1:  Loss: 0.6173 Accuracy: 79.08%
-Epoch 80, CIFAR-10 Batch 2:  Loss: 0.6088 Accuracy: 78.47%
-Epoch 80, CIFAR-10 Batch 3:  Loss: 0.5657 Accuracy: 79.95%
-Epoch 80, CIFAR-10 Batch 4:  Loss: 0.5740 Accuracy: 81.68%
-Epoch 80, CIFAR-10 Batch 5:  Loss: 0.6399 Accuracy: 78.22%
-Epoch 81, CIFAR-10 Batch 1:  Loss: 0.6514 Accuracy: 78.47%
-Epoch 81, CIFAR-10 Batch 2:  Loss: 0.6273 Accuracy: 76.86%
-Epoch 81, CIFAR-10 Batch 3:  Loss: 0.5404 Accuracy: 80.94%
-Epoch 81, CIFAR-10 Batch 4:  Loss: 0.5641 Accuracy: 81.31%
-Epoch 81, CIFAR-10 Batch 5:  Loss: 0.5783 Accuracy: 81.44%
-Epoch 82, CIFAR-10 Batch 1:  Loss: 0.6179 Accuracy: 79.21%
-Epoch 82, CIFAR-10 Batch 2:  Loss: 0.5648 Accuracy: 79.58%
-Epoch 82, CIFAR-10 Batch 3:  Loss: 0.5563 Accuracy: 80.57%
-Epoch 82, CIFAR-10 Batch 4:  Loss: 0.5852 Accuracy: 79.95%
-Epoch 82, CIFAR-10 Batch 5:  Loss: 0.5934 Accuracy: 79.33%
-Epoch 83, CIFAR-10 Batch 1:  Loss: 0.6764 Accuracy: 77.35%
-Epoch 83, CIFAR-10 Batch 2:  Loss: 0.5877 Accuracy: 79.46%
-Epoch 83, CIFAR-10 Batch 3:  Loss: 0.5642 Accuracy: 80.94%
-Epoch 83, CIFAR-10 Batch 4:  Loss: 0.5811 Accuracy: 80.32%
-Epoch 83, CIFAR-10 Batch 5:  Loss: 0.6287 Accuracy: 78.09%
-Epoch 84, CIFAR-10 Batch 1:  Loss: 0.6931 Accuracy: 76.11%
-Epoch 84, CIFAR-10 Batch 2:  Loss: 0.6107 Accuracy: 78.59%
-Epoch 84, CIFAR-10 Batch 3:  Loss: 0.5645 Accuracy: 80.82%
-Epoch 84, CIFAR-10 Batch 4:  Loss: 0.5254 Accuracy: 83.17%
-Epoch 84, CIFAR-10 Batch 5:  Loss: 0.5678 Accuracy: 80.07%
-Epoch 85, CIFAR-10 Batch 1:  Loss: 0.6204 Accuracy: 79.21%
-Epoch 85, CIFAR-10 Batch 2:  Loss: 0.6283 Accuracy: 77.48%
-Epoch 85, CIFAR-10 Batch 3:  Loss: 0.5820 Accuracy: 78.71%
-Epoch 85, CIFAR-10 Batch 4:  Loss: 0.5129 Accuracy: 84.16%
-Epoch 85, CIFAR-10 Batch 5:  Loss: 0.5551 Accuracy: 82.05%
-Epoch 86, CIFAR-10 Batch 1:  Loss: 0.5811 Accuracy: 81.19%
-Epoch 86, CIFAR-10 Batch 2:  Loss: 0.5588 Accuracy: 80.20%
-Epoch 86, CIFAR-10 Batch 3:  Loss: 0.5480 Accuracy: 79.70%
-Epoch 86, CIFAR-10 Batch 4:  Loss: 0.5095 Accuracy: 83.42%
-Epoch 86, CIFAR-10 Batch 5:  Loss: 0.5777 Accuracy: 80.57%
-Epoch 87, CIFAR-10 Batch 1:  Loss: 0.5791 Accuracy: 80.94%
-Epoch 87, CIFAR-10 Batch 2:  Loss: 0.5429 Accuracy: 80.32%
-Epoch 87, CIFAR-10 Batch 3:  Loss: 0.5296 Accuracy: 79.83%
-Epoch 87, CIFAR-10 Batch 4:  Loss: 0.5123 Accuracy: 83.54%
-Epoch 87, CIFAR-10 Batch 5:  Loss: 0.5607 Accuracy: 80.82%
-Epoch 88, CIFAR-10 Batch 1:  Loss: 0.5698 Accuracy: 81.44%
-Epoch 88, CIFAR-10 Batch 2:  Loss: 0.5700 Accuracy: 80.20%
-Epoch 88, CIFAR-10 Batch 3:  Loss: 0.5165 Accuracy: 81.44%
-Epoch 88, CIFAR-10 Batch 4:  Loss: 0.5014 Accuracy: 83.66%
-Epoch 88, CIFAR-10 Batch 5:  Loss: 0.5456 Accuracy: 80.69%
-Epoch 89, CIFAR-10 Batch 1:  Loss: 0.5666 Accuracy: 82.05%
-Epoch 89, CIFAR-10 Batch 2:  Loss: 0.5844 Accuracy: 79.83%
-Epoch 89, CIFAR-10 Batch 3:  Loss: 0.5593 Accuracy: 80.45%
-Epoch 89, CIFAR-10 Batch 4:  Loss: 0.5221 Accuracy: 83.17%
-Epoch 89, CIFAR-10 Batch 5:  Loss: 0.5253 Accuracy: 82.18%
-Epoch 90, CIFAR-10 Batch 1:  Loss: 0.5910 Accuracy: 79.33%
-Epoch 90, CIFAR-10 Batch 2:  Loss: 0.5975 Accuracy: 79.08%
-Epoch 90, CIFAR-10 Batch 3:  Loss: 0.5839 Accuracy: 80.20%
-Epoch 90, CIFAR-10 Batch 4:  Loss: 0.5392 Accuracy: 81.31%
-Epoch 90, CIFAR-10 Batch 5:  Loss: 0.5526 Accuracy: 81.44%
-Epoch 91, CIFAR-10 Batch 1:  Loss: 0.6206 Accuracy: 78.96%
-Epoch 91, CIFAR-10 Batch 2:  Loss: 0.6360 Accuracy: 77.48%
-Epoch 91, CIFAR-10 Batch 3:  Loss: 0.5702 Accuracy: 79.21%
-Epoch 91, CIFAR-10 Batch 4:  Loss: 0.5353 Accuracy: 82.30%
-Epoch 91, CIFAR-10 Batch 5:  Loss: 0.5387 Accuracy: 82.18%
-Epoch 92, CIFAR-10 Batch 1:  Loss: 0.5894 Accuracy: 80.07%
-Epoch 92, CIFAR-10 Batch 2:  Loss: 0.5956 Accuracy: 78.34%
-Epoch 92, CIFAR-10 Batch 3:  Loss: 0.5942 Accuracy: 77.23%
-Epoch 92, CIFAR-10 Batch 4:  Loss: 0.5705 Accuracy: 80.07%
-Epoch 92, CIFAR-10 Batch 5:  Loss: 0.5421 Accuracy: 82.30%
-Epoch 93, CIFAR-10 Batch 1:  Loss: 0.5468 Accuracy: 83.04%
-Epoch 93, CIFAR-10 Batch 2:  Loss: 0.5612 Accuracy: 79.83%
-Epoch 93, CIFAR-10 Batch 3:  Loss: 0.5507 Accuracy: 78.34%
-Epoch 93, CIFAR-10 Batch 4:  Loss: 0.5228 Accuracy: 82.55%
-Epoch 93, CIFAR-10 Batch 5:  Loss: 0.5163 Accuracy: 82.05%
-Epoch 94, CIFAR-10 Batch 1:  Loss: 0.5680 Accuracy: 80.20%
-Epoch 94, CIFAR-10 Batch 2:  Loss: 0.5570 Accuracy: 79.58%
-Epoch 94, CIFAR-10 Batch 3:  Loss: 0.5906 Accuracy: 77.60%
-Epoch 94, CIFAR-10 Batch 4:  Loss: 0.5254 Accuracy: 81.19%
-Epoch 94, CIFAR-10 Batch 5:  Loss: 0.5116 Accuracy: 82.30%
-Epoch 95, CIFAR-10 Batch 1:  Loss: 0.5675 Accuracy: 81.31%
-Epoch 95, CIFAR-10 Batch 2:  Loss: 0.5708 Accuracy: 78.59%
-Epoch 95, CIFAR-10 Batch 3:  Loss: 0.5618 Accuracy: 79.70%
-Epoch 95, CIFAR-10 Batch 4:  Loss: 0.4696 Accuracy: 85.52%
-Epoch 95, CIFAR-10 Batch 5:  Loss: 0.4859 Accuracy: 83.66%
-Epoch 96, CIFAR-10 Batch 1:  Loss: 0.5716 Accuracy: 79.95%
-Epoch 96, CIFAR-10 Batch 2:  Loss: 0.5726 Accuracy: 79.95%
-Epoch 96, CIFAR-10 Batch 3:  Loss: 0.5774 Accuracy: 79.70%
-Epoch 96, CIFAR-10 Batch 4:  Loss: 0.4867 Accuracy: 83.17%
-Epoch 96, CIFAR-10 Batch 5:  Loss: 0.4798 Accuracy: 83.42%
-Epoch 97, CIFAR-10 Batch 1:  Loss: 0.5394 Accuracy: 82.92%
-Epoch 97, CIFAR-10 Batch 2:  Loss: 0.5262 Accuracy: 81.19%
-Epoch 97, CIFAR-10 Batch 3:  Loss: 0.5173 Accuracy: 81.68%
-Epoch 97, CIFAR-10 Batch 4:  Loss: 0.5049 Accuracy: 82.18%
-Epoch 97, CIFAR-10 Batch 5:  Loss: 0.4760 Accuracy: 85.15%
-Epoch 98, CIFAR-10 Batch 1:  Loss: 0.5387 Accuracy: 82.67%
-Epoch 98, CIFAR-10 Batch 2:  Loss: 0.4844 Accuracy: 84.41%
-Epoch 98, CIFAR-10 Batch 3:  Loss: 0.5289 Accuracy: 80.07%
-Epoch 98, CIFAR-10 Batch 4:  Loss: 0.5120 Accuracy: 82.80%
-Epoch 98, CIFAR-10 Batch 5:  Loss: 0.4922 Accuracy: 83.66%
-Epoch 99, CIFAR-10 Batch 1:  Loss: 0.5363 Accuracy: 82.92%
-Epoch 99, CIFAR-10 Batch 2:  Loss: 0.5028 Accuracy: 82.30%
-Epoch 99, CIFAR-10 Batch 3:  Loss: 0.5005 Accuracy: 81.68%
-Epoch 99, CIFAR-10 Batch 4:  Loss: 0.5195 Accuracy: 82.43%
-Epoch 99, CIFAR-10 Batch 5:  Loss: 0.4864 Accuracy: 84.28%
-Epoch 100, CIFAR-10 Batch 1:  Loss: 0.5476 Accuracy: 82.30%
-Epoch 100, CIFAR-10 Batch 2:  Loss: 0.4939 Accuracy: 83.04%
-Epoch 100, CIFAR-10 Batch 3:  Loss: 0.5033 Accuracy: 80.20%
-Epoch 100, CIFAR-10 Batch 4:  Loss: 0.5219 Accuracy: 83.79%
-Epoch 100, CIFAR-10 Batch 5:  Loss: 0.4836 Accuracy: 84.90%
+Epoch  1, CIFAR-10 Batch 1:  Loss: 2.2342 Accuracy: 18.48%
+Epoch  1, CIFAR-10 Batch 2:  Loss: 2.0894 Accuracy: 24.18%
+Epoch  1, CIFAR-10 Batch 3:  Loss: 1.9272 Accuracy: 28.30%
+Epoch  1, CIFAR-10 Batch 4:  Loss: 1.9079 Accuracy: 29.88%
+Epoch  1, CIFAR-10 Batch 5:  Loss: 1.8269 Accuracy: 33.58%
+Epoch  2, CIFAR-10 Batch 1:  Loss: 1.7590 Accuracy: 34.50%
+Epoch  2, CIFAR-10 Batch 2:  Loss: 1.7633 Accuracy: 37.22%
+Epoch  2, CIFAR-10 Batch 3:  Loss: 1.6397 Accuracy: 37.82%
+Epoch  2, CIFAR-10 Batch 4:  Loss: 1.6392 Accuracy: 39.12%
+Epoch  2, CIFAR-10 Batch 5:  Loss: 1.6491 Accuracy: 39.46%
+Epoch  3, CIFAR-10 Batch 1:  Loss: 1.5864 Accuracy: 40.68%
+Epoch  3, CIFAR-10 Batch 2:  Loss: 1.6119 Accuracy: 41.62%
+Epoch  3, CIFAR-10 Batch 3:  Loss: 1.4821 Accuracy: 42.68%
+Epoch  3, CIFAR-10 Batch 4:  Loss: 1.5157 Accuracy: 42.90%
+Epoch  3, CIFAR-10 Batch 5:  Loss: 1.5251 Accuracy: 43.74%
+Epoch  4, CIFAR-10 Batch 1:  Loss: 1.4700 Accuracy: 44.64%
+Epoch  4, CIFAR-10 Batch 2:  Loss: 1.5529 Accuracy: 43.16%
+Epoch  4, CIFAR-10 Batch 3:  Loss: 1.4373 Accuracy: 42.98%
+Epoch  4, CIFAR-10 Batch 4:  Loss: 1.4331 Accuracy: 46.08%
+Epoch  4, CIFAR-10 Batch 5:  Loss: 1.4619 Accuracy: 46.40%
+Epoch  5, CIFAR-10 Batch 1:  Loss: 1.4111 Accuracy: 46.92%
+Epoch  5, CIFAR-10 Batch 2:  Loss: 1.4642 Accuracy: 46.54%
+Epoch  5, CIFAR-10 Batch 3:  Loss: 1.3623 Accuracy: 46.74%
+Epoch  5, CIFAR-10 Batch 4:  Loss: 1.3630 Accuracy: 48.00%
+Epoch  5, CIFAR-10 Batch 5:  Loss: 1.4138 Accuracy: 48.02%
+Epoch  6, CIFAR-10 Batch 1:  Loss: 1.3536 Accuracy: 48.54%
+Epoch  6, CIFAR-10 Batch 2:  Loss: 1.4283 Accuracy: 46.42%
+Epoch  6, CIFAR-10 Batch 3:  Loss: 1.3250 Accuracy: 46.92%
+Epoch  6, CIFAR-10 Batch 4:  Loss: 1.3375 Accuracy: 49.56%
+Epoch  6, CIFAR-10 Batch 5:  Loss: 1.3599 Accuracy: 49.06%
+Epoch  7, CIFAR-10 Batch 1:  Loss: 1.3217 Accuracy: 49.58%
+Epoch  7, CIFAR-10 Batch 2:  Loss: 1.3829 Accuracy: 48.54%
+Epoch  7, CIFAR-10 Batch 3:  Loss: 1.2886 Accuracy: 48.82%
+Epoch  7, CIFAR-10 Batch 4:  Loss: 1.2864 Accuracy: 50.40%
+Epoch  7, CIFAR-10 Batch 5:  Loss: 1.3293 Accuracy: 50.12%
+Epoch  8, CIFAR-10 Batch 1:  Loss: 1.2658 Accuracy: 51.40%
+Epoch  8, CIFAR-10 Batch 2:  Loss: 1.3236 Accuracy: 50.04%
+Epoch  8, CIFAR-10 Batch 3:  Loss: 1.2520 Accuracy: 50.64%
+Epoch  8, CIFAR-10 Batch 4:  Loss: 1.2512 Accuracy: 51.62%
+Epoch  8, CIFAR-10 Batch 5:  Loss: 1.2810 Accuracy: 52.10%
+Epoch  9, CIFAR-10 Batch 1:  Loss: 1.2422 Accuracy: 51.60%
+Epoch  9, CIFAR-10 Batch 2:  Loss: 1.2927 Accuracy: 50.76%
+Epoch  9, CIFAR-10 Batch 3:  Loss: 1.2169 Accuracy: 51.36%
+Epoch  9, CIFAR-10 Batch 4:  Loss: 1.2134 Accuracy: 52.12%
+Epoch  9, CIFAR-10 Batch 5:  Loss: 1.2376 Accuracy: 53.16%
+Epoch 10, CIFAR-10 Batch 1:  Loss: 1.2091 Accuracy: 52.26%
+Epoch 10, CIFAR-10 Batch 2:  Loss: 1.2564 Accuracy: 51.78%
+Epoch 10, CIFAR-10 Batch 3:  Loss: 1.1774 Accuracy: 53.18%
+Epoch 10, CIFAR-10 Batch 4:  Loss: 1.1762 Accuracy: 52.38%
+Epoch 10, CIFAR-10 Batch 5:  Loss: 1.2151 Accuracy: 53.24%
+Epoch 11, CIFAR-10 Batch 1:  Loss: 1.1654 Accuracy: 53.08%
+Epoch 11, CIFAR-10 Batch 2:  Loss: 1.2421 Accuracy: 52.24%
+Epoch 11, CIFAR-10 Batch 3:  Loss: 1.1642 Accuracy: 52.98%
+Epoch 11, CIFAR-10 Batch 4:  Loss: 1.1590 Accuracy: 53.34%
+Epoch 11, CIFAR-10 Batch 5:  Loss: 1.1970 Accuracy: 53.98%
+Epoch 12, CIFAR-10 Batch 1:  Loss: 1.1599 Accuracy: 53.90%
+Epoch 12, CIFAR-10 Batch 2:  Loss: 1.2207 Accuracy: 52.84%
+Epoch 12, CIFAR-10 Batch 3:  Loss: 1.1537 Accuracy: 53.14%
+Epoch 12, CIFAR-10 Batch 4:  Loss: 1.1507 Accuracy: 53.86%
+Epoch 12, CIFAR-10 Batch 5:  Loss: 1.1674 Accuracy: 54.52%
+Epoch 13, CIFAR-10 Batch 1:  Loss: 1.1388 Accuracy: 54.62%
+Epoch 13, CIFAR-10 Batch 2:  Loss: 1.1649 Accuracy: 55.10%
+Epoch 13, CIFAR-10 Batch 3:  Loss: 1.0993 Accuracy: 55.08%
+Epoch 13, CIFAR-10 Batch 4:  Loss: 1.1320 Accuracy: 54.24%
+Epoch 13, CIFAR-10 Batch 5:  Loss: 1.1242 Accuracy: 55.32%
+Epoch 14, CIFAR-10 Batch 1:  Loss: 1.0974 Accuracy: 54.92%
+Epoch 14, CIFAR-10 Batch 2:  Loss: 1.1667 Accuracy: 53.96%
+Epoch 14, CIFAR-10 Batch 3:  Loss: 1.0779 Accuracy: 55.00%
+Epoch 14, CIFAR-10 Batch 4:  Loss: 1.1167 Accuracy: 54.52%
+Epoch 14, CIFAR-10 Batch 5:  Loss: 1.0960 Accuracy: 56.10%
+Epoch 15, CIFAR-10 Batch 1:  Loss: 1.0870 Accuracy: 55.56%
+Epoch 15, CIFAR-10 Batch 2:  Loss: 1.1294 Accuracy: 55.80%
+Epoch 15, CIFAR-10 Batch 3:  Loss: 1.1330 Accuracy: 54.18%
+Epoch 15, CIFAR-10 Batch 4:  Loss: 1.1237 Accuracy: 53.96%
+Epoch 15, CIFAR-10 Batch 5:  Loss: 1.0973 Accuracy: 56.56%
+Epoch 16, CIFAR-10 Batch 1:  Loss: 1.1042 Accuracy: 55.78%
+Epoch 16, CIFAR-10 Batch 2:  Loss: 1.1133 Accuracy: 56.06%
+Epoch 16, CIFAR-10 Batch 3:  Loss: 1.0781 Accuracy: 55.56%
+Epoch 16, CIFAR-10 Batch 4:  Loss: 1.0553 Accuracy: 56.00%
+Epoch 16, CIFAR-10 Batch 5:  Loss: 1.0666 Accuracy: 56.38%
+Epoch 17, CIFAR-10 Batch 1:  Loss: 1.0972 Accuracy: 55.98%
+Epoch 17, CIFAR-10 Batch 2:  Loss: 1.1332 Accuracy: 54.82%
+Epoch 17, CIFAR-10 Batch 3:  Loss: 1.1077 Accuracy: 53.78%
+Epoch 17, CIFAR-10 Batch 4:  Loss: 1.0575 Accuracy: 56.56%
+Epoch 17, CIFAR-10 Batch 5:  Loss: 1.0789 Accuracy: 55.10%
+Epoch 18, CIFAR-10 Batch 1:  Loss: 1.0648 Accuracy: 56.82%
+Epoch 18, CIFAR-10 Batch 2:  Loss: 1.1042 Accuracy: 56.24%
+Epoch 18, CIFAR-10 Batch 3:  Loss: 1.0807 Accuracy: 55.22%
+Epoch 18, CIFAR-10 Batch 4:  Loss: 1.0407 Accuracy: 56.98%
+Epoch 18, CIFAR-10 Batch 5:  Loss: 1.0594 Accuracy: 55.82%
+Epoch 19, CIFAR-10 Batch 1:  Loss: 1.0486 Accuracy: 57.10%
+Epoch 19, CIFAR-10 Batch 2:  Loss: 1.0897 Accuracy: 55.46%
+Epoch 19, CIFAR-10 Batch 3:  Loss: 1.0890 Accuracy: 55.04%
+Epoch 19, CIFAR-10 Batch 4:  Loss: 1.0692 Accuracy: 55.90%
+Epoch 19, CIFAR-10 Batch 5:  Loss: 1.0244 Accuracy: 57.16%
+Epoch 20, CIFAR-10 Batch 1:  Loss: 1.0882 Accuracy: 55.76%
+Epoch 20, CIFAR-10 Batch 2:  Loss: 1.0778 Accuracy: 56.36%
+Epoch 20, CIFAR-10 Batch 3:  Loss: 1.1054 Accuracy: 54.62%
+Epoch 20, CIFAR-10 Batch 4:  Loss: 1.0252 Accuracy: 58.00%
+Epoch 20, CIFAR-10 Batch 5:  Loss: 1.0040 Accuracy: 57.46%
+Epoch 21, CIFAR-10 Batch 1:  Loss: 1.0219 Accuracy: 57.32%
+Epoch 21, CIFAR-10 Batch 2:  Loss: 1.0372 Accuracy: 57.70%
+Epoch 21, CIFAR-10 Batch 3:  Loss: 1.0602 Accuracy: 55.16%
+Epoch 21, CIFAR-10 Batch 4:  Loss: 1.0481 Accuracy: 56.40%
+Epoch 21, CIFAR-10 Batch 5:  Loss: 1.0052 Accuracy: 57.98%
+Epoch 22, CIFAR-10 Batch 1:  Loss: 1.0049 Accuracy: 57.68%
+Epoch 22, CIFAR-10 Batch 2:  Loss: 1.0348 Accuracy: 58.16%
+Epoch 22, CIFAR-10 Batch 3:  Loss: 1.0312 Accuracy: 55.82%
+Epoch 22, CIFAR-10 Batch 4:  Loss: 1.0223 Accuracy: 56.60%
+Epoch 22, CIFAR-10 Batch 5:  Loss: 0.9874 Accuracy: 58.30%
+Epoch 23, CIFAR-10 Batch 1:  Loss: 0.9848 Accuracy: 58.00%
+Epoch 23, CIFAR-10 Batch 2:  Loss: 1.0116 Accuracy: 57.68%
+Epoch 23, CIFAR-10 Batch 3:  Loss: 1.0251 Accuracy: 56.02%
+Epoch 23, CIFAR-10 Batch 4:  Loss: 0.9977 Accuracy: 57.28%
+Epoch 23, CIFAR-10 Batch 5:  Loss: 0.9836 Accuracy: 58.34%
+Epoch 24, CIFAR-10 Batch 1:  Loss: 0.9715 Accuracy: 58.46%
+Epoch 24, CIFAR-10 Batch 2:  Loss: 0.9930 Accuracy: 58.02%
+Epoch 24, CIFAR-10 Batch 3:  Loss: 0.9841 Accuracy: 56.76%
+Epoch 24, CIFAR-10 Batch 4:  Loss: 0.9842 Accuracy: 57.58%
+Epoch 24, CIFAR-10 Batch 5:  Loss: 0.9532 Accuracy: 58.74%
+Epoch 25, CIFAR-10 Batch 1:  Loss: 0.9735 Accuracy: 58.08%
+Epoch 25, CIFAR-10 Batch 2:  Loss: 0.9787 Accuracy: 58.62%
+Epoch 25, CIFAR-10 Batch 3:  Loss: 0.9434 Accuracy: 58.00%
+Epoch 25, CIFAR-10 Batch 4:  Loss: 0.9703 Accuracy: 57.70%
+Epoch 25, CIFAR-10 Batch 5:  Loss: 0.9385 Accuracy: 59.56%
+Epoch 26, CIFAR-10 Batch 1:  Loss: 0.9441 Accuracy: 58.48%
+Epoch 26, CIFAR-10 Batch 2:  Loss: 0.9639 Accuracy: 59.02%
+Epoch 26, CIFAR-10 Batch 3:  Loss: 0.9292 Accuracy: 58.02%
+Epoch 26, CIFAR-10 Batch 4:  Loss: 0.9434 Accuracy: 58.34%
+Epoch 26, CIFAR-10 Batch 5:  Loss: 0.9192 Accuracy: 59.22%
+Epoch 27, CIFAR-10 Batch 1:  Loss: 0.9471 Accuracy: 58.80%
+Epoch 27, CIFAR-10 Batch 2:  Loss: 0.9406 Accuracy: 59.36%
+Epoch 27, CIFAR-10 Batch 3:  Loss: 0.9099 Accuracy: 58.20%
+Epoch 27, CIFAR-10 Batch 4:  Loss: 0.9340 Accuracy: 58.04%
+Epoch 27, CIFAR-10 Batch 5:  Loss: 0.9037 Accuracy: 59.36%
+Epoch 28, CIFAR-10 Batch 1:  Loss: 0.9068 Accuracy: 59.00%
+Epoch 28, CIFAR-10 Batch 2:  Loss: 0.9343 Accuracy: 59.14%
+Epoch 28, CIFAR-10 Batch 3:  Loss: 0.9004 Accuracy: 58.38%
+Epoch 28, CIFAR-10 Batch 4:  Loss: 0.9093 Accuracy: 58.76%
+Epoch 28, CIFAR-10 Batch 5:  Loss: 0.8875 Accuracy: 59.44%
+Epoch 29, CIFAR-10 Batch 1:  Loss: 0.9130 Accuracy: 59.04%
+Epoch 29, CIFAR-10 Batch 2:  Loss: 0.9083 Accuracy: 59.40%
+Epoch 29, CIFAR-10 Batch 3:  Loss: 0.8895 Accuracy: 58.54%
+Epoch 29, CIFAR-10 Batch 4:  Loss: 0.9160 Accuracy: 58.42%
+Epoch 29, CIFAR-10 Batch 5:  Loss: 0.8952 Accuracy: 59.42%
+Epoch 30, CIFAR-10 Batch 1:  Loss: 0.9022 Accuracy: 58.80%
+Epoch 30, CIFAR-10 Batch 2:  Loss: 0.9144 Accuracy: 59.28%
+Epoch 30, CIFAR-10 Batch 3:  Loss: 0.8810 Accuracy: 58.70%
+Epoch 30, CIFAR-10 Batch 4:  Loss: 0.8993 Accuracy: 59.24%
+Epoch 30, CIFAR-10 Batch 5:  Loss: 0.8752 Accuracy: 59.62%
+Epoch 31, CIFAR-10 Batch 1:  Loss: 0.8821 Accuracy: 59.58%
+Epoch 31, CIFAR-10 Batch 2:  Loss: 0.8867 Accuracy: 59.58%
+Epoch 31, CIFAR-10 Batch 3:  Loss: 0.8993 Accuracy: 58.30%
+Epoch 31, CIFAR-10 Batch 4:  Loss: 0.8954 Accuracy: 58.54%
+Epoch 31, CIFAR-10 Batch 5:  Loss: 0.8623 Accuracy: 59.38%
+Epoch 32, CIFAR-10 Batch 1:  Loss: 0.8901 Accuracy: 59.52%
+Epoch 32, CIFAR-10 Batch 2:  Loss: 0.8759 Accuracy: 59.74%
+Epoch 32, CIFAR-10 Batch 3:  Loss: 0.8562 Accuracy: 58.88%
+Epoch 32, CIFAR-10 Batch 4:  Loss: 0.9013 Accuracy: 58.60%
+Epoch 32, CIFAR-10 Batch 5:  Loss: 0.8480 Accuracy: 59.98%
+Epoch 33, CIFAR-10 Batch 1:  Loss: 0.8800 Accuracy: 59.52%
+Epoch 33, CIFAR-10 Batch 2:  Loss: 0.8730 Accuracy: 59.94%
+Epoch 33, CIFAR-10 Batch 3:  Loss: 0.8718 Accuracy: 57.90%
+Epoch 33, CIFAR-10 Batch 4:  Loss: 0.8790 Accuracy: 59.12%
+Epoch 33, CIFAR-10 Batch 5:  Loss: 0.8400 Accuracy: 59.66%
+Epoch 34, CIFAR-10 Batch 1:  Loss: 0.8852 Accuracy: 59.66%
+Epoch 34, CIFAR-10 Batch 2:  Loss: 0.8718 Accuracy: 59.76%
+Epoch 34, CIFAR-10 Batch 3:  Loss: 0.8427 Accuracy: 59.02%
+Epoch 34, CIFAR-10 Batch 4:  Loss: 0.8595 Accuracy: 58.98%
+Epoch 34, CIFAR-10 Batch 5:  Loss: 0.8503 Accuracy: 59.22%
+Epoch 35, CIFAR-10 Batch 1:  Loss: 0.8740 Accuracy: 59.88%
+Epoch 35, CIFAR-10 Batch 2:  Loss: 0.8963 Accuracy: 59.52%
+Epoch 35, CIFAR-10 Batch 3:  Loss: 0.8635 Accuracy: 58.72%
+Epoch 35, CIFAR-10 Batch 4:  Loss: 0.8838 Accuracy: 58.82%
+Epoch 35, CIFAR-10 Batch 5:  Loss: 0.9112 Accuracy: 57.52%
+Epoch 36, CIFAR-10 Batch 1:  Loss: 0.8763 Accuracy: 59.84%
+Epoch 36, CIFAR-10 Batch 2:  Loss: 0.8861 Accuracy: 58.70%
+Epoch 36, CIFAR-10 Batch 3:  Loss: 0.8373 Accuracy: 58.78%
+Epoch 36, CIFAR-10 Batch 4:  Loss: 0.8502 Accuracy: 59.42%
+Epoch 36, CIFAR-10 Batch 5:  Loss: 0.8578 Accuracy: 59.02%
+Epoch 37, CIFAR-10 Batch 1:  Loss: 0.8702 Accuracy: 59.32%
+Epoch 37, CIFAR-10 Batch 2:  Loss: 0.8635 Accuracy: 59.36%
+Epoch 37, CIFAR-10 Batch 3:  Loss: 0.8386 Accuracy: 58.26%
+Epoch 37, CIFAR-10 Batch 4:  Loss: 0.8988 Accuracy: 58.04%
+Epoch 37, CIFAR-10 Batch 5:  Loss: 0.8630 Accuracy: 58.60%
+Epoch 38, CIFAR-10 Batch 1:  Loss: 0.8496 Accuracy: 59.34%
+Epoch 38, CIFAR-10 Batch 2:  Loss: 0.8711 Accuracy: 58.80%
+Epoch 38, CIFAR-10 Batch 3:  Loss: 0.7815 Accuracy: 59.36%
+Epoch 38, CIFAR-10 Batch 4:  Loss: 0.8585 Accuracy: 58.54%
+Epoch 38, CIFAR-10 Batch 5:  Loss: 0.8385 Accuracy: 58.36%
+Epoch 39, CIFAR-10 Batch 1:  Loss: 0.8138 Accuracy: 59.90%
+Epoch 39, CIFAR-10 Batch 2:  Loss: 0.8406 Accuracy: 59.64%
+Epoch 39, CIFAR-10 Batch 3:  Loss: 0.7731 Accuracy: 59.74%
+Epoch 39, CIFAR-10 Batch 4:  Loss: 0.8387 Accuracy: 59.28%
+Epoch 39, CIFAR-10 Batch 5:  Loss: 0.8265 Accuracy: 59.00%
+Epoch 40, CIFAR-10 Batch 1:  Loss: 0.8416 Accuracy: 59.12%
+Epoch 40, CIFAR-10 Batch 2:  Loss: 0.8336 Accuracy: 60.18%
+Epoch 40, CIFAR-10 Batch 3:  Loss: 0.7966 Accuracy: 59.28%
+Epoch 40, CIFAR-10 Batch 4:  Loss: 0.8411 Accuracy: 59.76%
+Epoch 40, CIFAR-10 Batch 5:  Loss: 0.8115 Accuracy: 59.26%
+Epoch 41, CIFAR-10 Batch 1:  Loss: 0.8289 Accuracy: 59.22%
+Epoch 41, CIFAR-10 Batch 2:  Loss: 0.8254 Accuracy: 60.22%
+Epoch 41, CIFAR-10 Batch 3:  Loss: 0.7763 Accuracy: 59.74%
+Epoch 41, CIFAR-10 Batch 4:  Loss: 0.8241 Accuracy: 60.48%
+Epoch 41, CIFAR-10 Batch 5:  Loss: 0.7948 Accuracy: 59.64%
+Epoch 42, CIFAR-10 Batch 1:  Loss: 0.8124 Accuracy: 59.54%
+Epoch 42, CIFAR-10 Batch 2:  Loss: 0.7945 Accuracy: 60.90%
+Epoch 42, CIFAR-10 Batch 3:  Loss: 0.7758 Accuracy: 59.58%
+Epoch 42, CIFAR-10 Batch 4:  Loss: 0.8162 Accuracy: 59.86%
+Epoch 42, CIFAR-10 Batch 5:  Loss: 0.7691 Accuracy: 60.44%
+Epoch 43, CIFAR-10 Batch 1:  Loss: 0.7838 Accuracy: 59.56%
+Epoch 43, CIFAR-10 Batch 2:  Loss: 0.7778 Accuracy: 61.42%
+Epoch 43, CIFAR-10 Batch 3:  Loss: 0.7461 Accuracy: 60.76%
+Epoch 43, CIFAR-10 Batch 4:  Loss: 0.7976 Accuracy: 60.52%
+Epoch 43, CIFAR-10 Batch 5:  Loss: 0.7503 Accuracy: 60.40%
+Epoch 44, CIFAR-10 Batch 1:  Loss: 0.7906 Accuracy: 59.80%
+Epoch 44, CIFAR-10 Batch 2:  Loss: 0.7692 Accuracy: 61.64%
+Epoch 44, CIFAR-10 Batch 3:  Loss: 0.7546 Accuracy: 60.08%
+Epoch 44, CIFAR-10 Batch 4:  Loss: 0.7860 Accuracy: 59.90%
+Epoch 44, CIFAR-10 Batch 5:  Loss: 0.7565 Accuracy: 60.34%
+Epoch 45, CIFAR-10 Batch 1:  Loss: 0.7599 Accuracy: 60.68%
+Epoch 45, CIFAR-10 Batch 2:  Loss: 0.7716 Accuracy: 60.76%
+Epoch 45, CIFAR-10 Batch 3:  Loss: 0.7303 Accuracy: 60.82%
+Epoch 45, CIFAR-10 Batch 4:  Loss: 0.7635 Accuracy: 60.52%
+Epoch 45, CIFAR-10 Batch 5:  Loss: 0.7476 Accuracy: 59.82%
+Epoch 46, CIFAR-10 Batch 1:  Loss: 0.7490 Accuracy: 61.20%
+Epoch 46, CIFAR-10 Batch 2:  Loss: 0.7643 Accuracy: 60.46%
+Epoch 46, CIFAR-10 Batch 3:  Loss: 0.7226 Accuracy: 60.64%
+Epoch 46, CIFAR-10 Batch 4:  Loss: 0.7652 Accuracy: 59.80%
+Epoch 46, CIFAR-10 Batch 5:  Loss: 0.7319 Accuracy: 60.40%
+Epoch 47, CIFAR-10 Batch 1:  Loss: 0.7477 Accuracy: 61.12%
+Epoch 47, CIFAR-10 Batch 2:  Loss: 0.7490 Accuracy: 60.90%
+Epoch 47, CIFAR-10 Batch 3:  Loss: 0.7005 Accuracy: 60.46%
+Epoch 47, CIFAR-10 Batch 4:  Loss: 0.7427 Accuracy: 60.46%
+Epoch 47, CIFAR-10 Batch 5:  Loss: 0.7177 Accuracy: 60.46%
+Epoch 48, CIFAR-10 Batch 1:  Loss: 0.7432 Accuracy: 60.90%
+Epoch 48, CIFAR-10 Batch 2:  Loss: 0.7453 Accuracy: 60.60%
+Epoch 48, CIFAR-10 Batch 3:  Loss: 0.6990 Accuracy: 60.56%
+Epoch 48, CIFAR-10 Batch 4:  Loss: 0.7511 Accuracy: 60.28%
+Epoch 48, CIFAR-10 Batch 5:  Loss: 0.7384 Accuracy: 59.58%
+Epoch 49, CIFAR-10 Batch 1:  Loss: 0.7333 Accuracy: 61.32%
+Epoch 49, CIFAR-10 Batch 2:  Loss: 0.7300 Accuracy: 61.00%
+Epoch 49, CIFAR-10 Batch 3:  Loss: 0.6942 Accuracy: 60.64%
+Epoch 49, CIFAR-10 Batch 4:  Loss: 0.7229 Accuracy: 60.70%
+Epoch 49, CIFAR-10 Batch 5:  Loss: 0.7148 Accuracy: 60.36%
+Epoch 50, CIFAR-10 Batch 1:  Loss: 0.7188 Accuracy: 61.08%
+Epoch 50, CIFAR-10 Batch 2:  Loss: 0.7292 Accuracy: 60.30%
+Epoch 50, CIFAR-10 Batch 3:  Loss: 0.7068 Accuracy: 60.28%
+Epoch 50, CIFAR-10 Batch 4:  Loss: 0.7534 Accuracy: 60.56%
+Epoch 50, CIFAR-10 Batch 5:  Loss: 0.7293 Accuracy: 59.72%
+Epoch 51, CIFAR-10 Batch 1:  Loss: 0.7256 Accuracy: 60.94%
+Epoch 51, CIFAR-10 Batch 2:  Loss: 0.7244 Accuracy: 60.56%
+Epoch 51, CIFAR-10 Batch 3:  Loss: 0.6995 Accuracy: 60.70%
+Epoch 51, CIFAR-10 Batch 4:  Loss: 0.7565 Accuracy: 60.22%
+Epoch 51, CIFAR-10 Batch 5:  Loss: 0.7410 Accuracy: 59.42%
+Epoch 52, CIFAR-10 Batch 1:  Loss: 0.7651 Accuracy: 60.32%
+Epoch 52, CIFAR-10 Batch 2:  Loss: 0.7652 Accuracy: 59.50%
+Epoch 52, CIFAR-10 Batch 3:  Loss: 0.7005 Accuracy: 61.32%
+Epoch 52, CIFAR-10 Batch 4:  Loss: 0.7361 Accuracy: 60.44%
+Epoch 52, CIFAR-10 Batch 5:  Loss: 0.7442 Accuracy: 59.86%
+Epoch 53, CIFAR-10 Batch 1:  Loss: 0.7360 Accuracy: 61.36%
+Epoch 53, CIFAR-10 Batch 2:  Loss: 0.7530 Accuracy: 59.28%
+Epoch 53, CIFAR-10 Batch 3:  Loss: 0.7535 Accuracy: 59.66%
+Epoch 53, CIFAR-10 Batch 4:  Loss: 0.7600 Accuracy: 59.38%
+Epoch 53, CIFAR-10 Batch 5:  Loss: 0.7604 Accuracy: 59.10%
+Epoch 54, CIFAR-10 Batch 1:  Loss: 0.7459 Accuracy: 61.08%
+Epoch 54, CIFAR-10 Batch 2:  Loss: 0.7755 Accuracy: 57.92%
+Epoch 54, CIFAR-10 Batch 3:  Loss: 0.7550 Accuracy: 60.06%
+Epoch 54, CIFAR-10 Batch 4:  Loss: 0.7777 Accuracy: 59.92%
+Epoch 54, CIFAR-10 Batch 5:  Loss: 0.7237 Accuracy: 60.40%
+Epoch 55, CIFAR-10 Batch 1:  Loss: 0.7943 Accuracy: 58.08%
+Epoch 55, CIFAR-10 Batch 2:  Loss: 0.7413 Accuracy: 61.50%
+Epoch 55, CIFAR-10 Batch 3:  Loss: 0.6969 Accuracy: 60.08%
+Epoch 55, CIFAR-10 Batch 4:  Loss: 0.7397 Accuracy: 60.10%
+Epoch 55, CIFAR-10 Batch 5:  Loss: 0.7072 Accuracy: 60.60%
+Epoch 56, CIFAR-10 Batch 1:  Loss: 0.7657 Accuracy: 58.70%
+Epoch 56, CIFAR-10 Batch 2:  Loss: 0.7231 Accuracy: 60.60%
+Epoch 56, CIFAR-10 Batch 3:  Loss: 0.7018 Accuracy: 60.08%
+Epoch 56, CIFAR-10 Batch 4:  Loss: 0.7355 Accuracy: 59.36%
+Epoch 56, CIFAR-10 Batch 5:  Loss: 0.7764 Accuracy: 58.78%
+Epoch 57, CIFAR-10 Batch 1:  Loss: 0.7270 Accuracy: 60.36%
+Epoch 57, CIFAR-10 Batch 2:  Loss: 0.7594 Accuracy: 59.80%
+Epoch 57, CIFAR-10 Batch 3:  Loss: 0.7310 Accuracy: 59.56%
+Epoch 57, CIFAR-10 Batch 4:  Loss: 0.7392 Accuracy: 60.04%
+Epoch 57, CIFAR-10 Batch 5:  Loss: 0.7216 Accuracy: 60.06%
+Epoch 58, CIFAR-10 Batch 1:  Loss: 0.6991 Accuracy: 61.12%
+Epoch 58, CIFAR-10 Batch 2:  Loss: 0.7290 Accuracy: 60.10%
+Epoch 58, CIFAR-10 Batch 3:  Loss: 0.6918 Accuracy: 59.58%
+Epoch 58, CIFAR-10 Batch 4:  Loss: 0.7097 Accuracy: 60.78%
+Epoch 58, CIFAR-10 Batch 5:  Loss: 0.7146 Accuracy: 59.94%
+Epoch 59, CIFAR-10 Batch 1:  Loss: 0.6931 Accuracy: 60.66%
+Epoch 59, CIFAR-10 Batch 2:  Loss: 0.6899 Accuracy: 60.72%
+Epoch 59, CIFAR-10 Batch 3:  Loss: 0.6567 Accuracy: 59.88%
+Epoch 59, CIFAR-10 Batch 4:  Loss: 0.6829 Accuracy: 61.10%
+Epoch 59, CIFAR-10 Batch 5:  Loss: 0.6694 Accuracy: 60.94%
+Epoch 60, CIFAR-10 Batch 1:  Loss: 0.6790 Accuracy: 61.64%
+Epoch 60, CIFAR-10 Batch 2:  Loss: 0.7011 Accuracy: 60.36%
+Epoch 60, CIFAR-10 Batch 3:  Loss: 0.6352 Accuracy: 60.46%
+Epoch 60, CIFAR-10 Batch 4:  Loss: 0.6620 Accuracy: 61.42%
+Epoch 60, CIFAR-10 Batch 5:  Loss: 0.6674 Accuracy: 60.76%
+Epoch 61, CIFAR-10 Batch 1:  Loss: 0.6655 Accuracy: 61.16%
+Epoch 61, CIFAR-10 Batch 2:  Loss: 0.6754 Accuracy: 60.08%
+Epoch 61, CIFAR-10 Batch 3:  Loss: 0.6587 Accuracy: 59.96%
+Epoch 61, CIFAR-10 Batch 4:  Loss: 0.6666 Accuracy: 60.76%
+Epoch 61, CIFAR-10 Batch 5:  Loss: 0.6649 Accuracy: 60.56%
+Epoch 62, CIFAR-10 Batch 1:  Loss: 0.6458 Accuracy: 61.30%
+Epoch 62, CIFAR-10 Batch 2:  Loss: 0.6847 Accuracy: 60.02%
+Epoch 62, CIFAR-10 Batch 3:  Loss: 0.6860 Accuracy: 59.58%
+Epoch 62, CIFAR-10 Batch 4:  Loss: 0.6554 Accuracy: 61.02%
+Epoch 62, CIFAR-10 Batch 5:  Loss: 0.6676 Accuracy: 60.92%
+Epoch 63, CIFAR-10 Batch 1:  Loss: 0.6641 Accuracy: 60.96%
+Epoch 63, CIFAR-10 Batch 2:  Loss: 0.6478 Accuracy: 61.08%
+Epoch 63, CIFAR-10 Batch 3:  Loss: 0.6844 Accuracy: 60.40%
+Epoch 63, CIFAR-10 Batch 4:  Loss: 0.6799 Accuracy: 60.40%
+Epoch 63, CIFAR-10 Batch 5:  Loss: 0.6721 Accuracy: 60.80%
+Epoch 64, CIFAR-10 Batch 1:  Loss: 0.6538 Accuracy: 61.50%
+Epoch 64, CIFAR-10 Batch 2:  Loss: 0.6675 Accuracy: 61.24%
+Epoch 64, CIFAR-10 Batch 3:  Loss: 0.6787 Accuracy: 60.14%
+Epoch 64, CIFAR-10 Batch 4:  Loss: 0.6725 Accuracy: 60.14%
+Epoch 64, CIFAR-10 Batch 5:  Loss: 0.6809 Accuracy: 60.46%
+Epoch 65, CIFAR-10 Batch 1:  Loss: 0.6827 Accuracy: 60.24%
+Epoch 65, CIFAR-10 Batch 2:  Loss: 0.6995 Accuracy: 60.98%
+Epoch 65, CIFAR-10 Batch 3:  Loss: 0.6598 Accuracy: 60.42%
+Epoch 65, CIFAR-10 Batch 4:  Loss: 0.6865 Accuracy: 60.58%
+Epoch 65, CIFAR-10 Batch 5:  Loss: 0.6628 Accuracy: 60.98%
+Epoch 66, CIFAR-10 Batch 1:  Loss: 0.6577 Accuracy: 60.78%
+Epoch 66, CIFAR-10 Batch 2:  Loss: 0.6864 Accuracy: 61.06%
+Epoch 66, CIFAR-10 Batch 3:  Loss: 0.6411 Accuracy: 60.92%
+Epoch 66, CIFAR-10 Batch 4:  Loss: 0.6758 Accuracy: 61.08%
+Epoch 66, CIFAR-10 Batch 5:  Loss: 0.6350 Accuracy: 60.80%
+Epoch 67, CIFAR-10 Batch 1:  Loss: 0.6324 Accuracy: 60.96%
+Epoch 67, CIFAR-10 Batch 2:  Loss: 0.7000 Accuracy: 60.70%
+Epoch 67, CIFAR-10 Batch 3:  Loss: 0.6845 Accuracy: 59.78%
+Epoch 67, CIFAR-10 Batch 4:  Loss: 0.6919 Accuracy: 60.18%
+Epoch 67, CIFAR-10 Batch 5:  Loss: 0.6494 Accuracy: 60.92%
+Epoch 68, CIFAR-10 Batch 1:  Loss: 0.6467 Accuracy: 60.20%
+Epoch 68, CIFAR-10 Batch 2:  Loss: 0.7149 Accuracy: 59.76%
+Epoch 68, CIFAR-10 Batch 3:  Loss: 0.6573 Accuracy: 61.22%
+Epoch 68, CIFAR-10 Batch 4:  Loss: 0.7478 Accuracy: 60.14%
+Epoch 68, CIFAR-10 Batch 5:  Loss: 0.6755 Accuracy: 61.22%
+Epoch 69, CIFAR-10 Batch 1:  Loss: 0.6800 Accuracy: 60.12%
+Epoch 69, CIFAR-10 Batch 2:  Loss: 0.7370 Accuracy: 59.66%
+Epoch 69, CIFAR-10 Batch 3:  Loss: 0.6444 Accuracy: 61.66%
+Epoch 69, CIFAR-10 Batch 4:  Loss: 0.6921 Accuracy: 60.70%
+Epoch 69, CIFAR-10 Batch 5:  Loss: 0.6571 Accuracy: 61.50%
+Epoch 70, CIFAR-10 Batch 1:  Loss: 0.6640 Accuracy: 62.10%
+Epoch 70, CIFAR-10 Batch 2:  Loss: 0.6755 Accuracy: 60.86%
+Epoch 70, CIFAR-10 Batch 3:  Loss: 0.6696 Accuracy: 60.88%
+Epoch 70, CIFAR-10 Batch 4:  Loss: 0.7299 Accuracy: 59.40%
+Epoch 70, CIFAR-10 Batch 5:  Loss: 0.6456 Accuracy: 61.52%
+Epoch 71, CIFAR-10 Batch 1:  Loss: 0.6650 Accuracy: 61.36%
+Epoch 71, CIFAR-10 Batch 2:  Loss: 0.6479 Accuracy: 61.44%
+Epoch 71, CIFAR-10 Batch 3:  Loss: 0.6391 Accuracy: 60.82%
+Epoch 71, CIFAR-10 Batch 4:  Loss: 0.7123 Accuracy: 60.30%
+Epoch 71, CIFAR-10 Batch 5:  Loss: 0.6555 Accuracy: 61.48%
+Epoch 72, CIFAR-10 Batch 1:  Loss: 0.6759 Accuracy: 61.12%
+Epoch 72, CIFAR-10 Batch 2:  Loss: 0.6457 Accuracy: 61.44%
+Epoch 72, CIFAR-10 Batch 3:  Loss: 0.5983 Accuracy: 61.22%
+Epoch 72, CIFAR-10 Batch 4:  Loss: 0.6904 Accuracy: 60.74%
+Epoch 72, CIFAR-10 Batch 5:  Loss: 0.6400 Accuracy: 61.42%
+Epoch 73, CIFAR-10 Batch 1:  Loss: 0.6500 Accuracy: 61.30%
+Epoch 73, CIFAR-10 Batch 2:  Loss: 0.6247 Accuracy: 61.40%
+Epoch 73, CIFAR-10 Batch 3:  Loss: 0.6312 Accuracy: 59.88%
+Epoch 73, CIFAR-10 Batch 4:  Loss: 0.6643 Accuracy: 60.84%
+Epoch 73, CIFAR-10 Batch 5:  Loss: 0.6142 Accuracy: 62.28%
+Epoch 74, CIFAR-10 Batch 1:  Loss: 0.6036 Accuracy: 61.72%
+Epoch 74, CIFAR-10 Batch 2:  Loss: 0.6224 Accuracy: 61.68%
+Epoch 74, CIFAR-10 Batch 3:  Loss: 0.5773 Accuracy: 61.90%
+Epoch 74, CIFAR-10 Batch 4:  Loss: 0.6695 Accuracy: 60.58%
+Epoch 74, CIFAR-10 Batch 5:  Loss: 0.6145 Accuracy: 61.88%
+Epoch 75, CIFAR-10 Batch 1:  Loss: 0.5959 Accuracy: 61.72%
+Epoch 75, CIFAR-10 Batch 2:  Loss: 0.6256 Accuracy: 61.36%
+Epoch 75, CIFAR-10 Batch 3:  Loss: 0.6015 Accuracy: 60.66%
+Epoch 75, CIFAR-10 Batch 4:  Loss: 0.6293 Accuracy: 60.64%
+Epoch 75, CIFAR-10 Batch 5:  Loss: 0.5893 Accuracy: 62.00%
+Epoch 76, CIFAR-10 Batch 1:  Loss: 0.5930 Accuracy: 61.72%
+Epoch 76, CIFAR-10 Batch 2:  Loss: 0.6458 Accuracy: 61.22%
+Epoch 76, CIFAR-10 Batch 3:  Loss: 0.5808 Accuracy: 61.30%
+Epoch 76, CIFAR-10 Batch 4:  Loss: 0.6569 Accuracy: 59.04%
+Epoch 76, CIFAR-10 Batch 5:  Loss: 0.5705 Accuracy: 62.12%
+Epoch 77, CIFAR-10 Batch 1:  Loss: 0.5838 Accuracy: 61.52%
+Epoch 77, CIFAR-10 Batch 2:  Loss: 0.6309 Accuracy: 61.20%
+Epoch 77, CIFAR-10 Batch 3:  Loss: 0.5977 Accuracy: 60.46%
+Epoch 77, CIFAR-10 Batch 4:  Loss: 0.6665 Accuracy: 59.44%
+Epoch 77, CIFAR-10 Batch 5:  Loss: 0.6276 Accuracy: 60.78%
+Epoch 78, CIFAR-10 Batch 1:  Loss: 0.6100 Accuracy: 60.90%
+Epoch 78, CIFAR-10 Batch 2:  Loss: 0.6025 Accuracy: 62.04%
+Epoch 78, CIFAR-10 Batch 3:  Loss: 0.5829 Accuracy: 61.62%
+Epoch 78, CIFAR-10 Batch 4:  Loss: 0.6480 Accuracy: 59.62%
+Epoch 78, CIFAR-10 Batch 5:  Loss: 0.6081 Accuracy: 60.88%
+Epoch 79, CIFAR-10 Batch 1:  Loss: 0.5996 Accuracy: 60.96%
+Epoch 79, CIFAR-10 Batch 2:  Loss: 0.5932 Accuracy: 62.26%
+Epoch 79, CIFAR-10 Batch 3:  Loss: 0.5454 Accuracy: 62.34%
+Epoch 79, CIFAR-10 Batch 4:  Loss: 0.6023 Accuracy: 60.56%
+Epoch 79, CIFAR-10 Batch 5:  Loss: 0.5755 Accuracy: 60.94%
+Epoch 80, CIFAR-10 Batch 1:  Loss: 0.5799 Accuracy: 61.60%
+Epoch 80, CIFAR-10 Batch 2:  Loss: 0.5754 Accuracy: 62.44%
+Epoch 80, CIFAR-10 Batch 3:  Loss: 0.5422 Accuracy: 62.38%
+Epoch 80, CIFAR-10 Batch 4:  Loss: 0.5986 Accuracy: 61.14%
+Epoch 80, CIFAR-10 Batch 5:  Loss: 0.5334 Accuracy: 61.98%
+Epoch 81, CIFAR-10 Batch 1:  Loss: 0.5581 Accuracy: 61.30%
+Epoch 81, CIFAR-10 Batch 2:  Loss: 0.5564 Accuracy: 62.06%
+Epoch 81, CIFAR-10 Batch 3:  Loss: 0.5204 Accuracy: 62.92%
+Epoch 81, CIFAR-10 Batch 4:  Loss: 0.5751 Accuracy: 61.38%
+Epoch 81, CIFAR-10 Batch 5:  Loss: 0.5085 Accuracy: 61.98%
+Epoch 82, CIFAR-10 Batch 1:  Loss: 0.5561 Accuracy: 61.18%
+Epoch 82, CIFAR-10 Batch 2:  Loss: 0.5488 Accuracy: 62.30%
+Epoch 82, CIFAR-10 Batch 3:  Loss: 0.5044 Accuracy: 63.42%
+Epoch 82, CIFAR-10 Batch 4:  Loss: 0.5544 Accuracy: 61.28%
+Epoch 82, CIFAR-10 Batch 5:  Loss: 0.5015 Accuracy: 61.84%
+Epoch 83, CIFAR-10 Batch 1:  Loss: 0.5502 Accuracy: 61.70%
+Epoch 83, CIFAR-10 Batch 2:  Loss: 0.5426 Accuracy: 61.92%
+Epoch 83, CIFAR-10 Batch 3:  Loss: 0.4907 Accuracy: 63.06%
+Epoch 83, CIFAR-10 Batch 4:  Loss: 0.5493 Accuracy: 61.68%
+Epoch 83, CIFAR-10 Batch 5:  Loss: 0.4959 Accuracy: 61.64%
+Epoch 84, CIFAR-10 Batch 1:  Loss: 0.5645 Accuracy: 61.50%
+Epoch 84, CIFAR-10 Batch 2:  Loss: 0.5619 Accuracy: 61.60%
+Epoch 84, CIFAR-10 Batch 3:  Loss: 0.5289 Accuracy: 61.50%
+Epoch 84, CIFAR-10 Batch 4:  Loss: 0.5834 Accuracy: 61.16%
+Epoch 84, CIFAR-10 Batch 5:  Loss: 0.4947 Accuracy: 61.78%
+Epoch 85, CIFAR-10 Batch 1:  Loss: 0.5350 Accuracy: 61.88%
+Epoch 85, CIFAR-10 Batch 2:  Loss: 0.5593 Accuracy: 60.94%
+Epoch 85, CIFAR-10 Batch 3:  Loss: 0.5276 Accuracy: 61.72%
+Epoch 85, CIFAR-10 Batch 4:  Loss: 0.6019 Accuracy: 60.42%
+Epoch 85, CIFAR-10 Batch 5:  Loss: 0.5090 Accuracy: 61.66%
+Epoch 86, CIFAR-10 Batch 1:  Loss: 0.5473 Accuracy: 61.72%
+Epoch 86, CIFAR-10 Batch 2:  Loss: 0.5663 Accuracy: 60.82%
+Epoch 86, CIFAR-10 Batch 3:  Loss: 0.5196 Accuracy: 61.54%
+Epoch 86, CIFAR-10 Batch 4:  Loss: 0.6618 Accuracy: 58.62%
+Epoch 86, CIFAR-10 Batch 5:  Loss: 0.5462 Accuracy: 61.10%
+Epoch 87, CIFAR-10 Batch 1:  Loss: 0.5616 Accuracy: 60.50%
+Epoch 87, CIFAR-10 Batch 2:  Loss: 0.5558 Accuracy: 61.90%
+Epoch 87, CIFAR-10 Batch 3:  Loss: 0.6096 Accuracy: 60.46%
+Epoch 87, CIFAR-10 Batch 4:  Loss: 0.6361 Accuracy: 59.38%
+Epoch 87, CIFAR-10 Batch 5:  Loss: 0.5123 Accuracy: 61.64%
+Epoch 88, CIFAR-10 Batch 1:  Loss: 0.5561 Accuracy: 62.00%
+Epoch 88, CIFAR-10 Batch 2:  Loss: 0.5824 Accuracy: 61.16%
+Epoch 88, CIFAR-10 Batch 3:  Loss: 0.5612 Accuracy: 61.58%
+Epoch 88, CIFAR-10 Batch 4:  Loss: 0.5809 Accuracy: 61.78%
+Epoch 88, CIFAR-10 Batch 5:  Loss: 0.5330 Accuracy: 60.94%
+Epoch 89, CIFAR-10 Batch 1:  Loss: 0.5552 Accuracy: 61.36%
+Epoch 89, CIFAR-10 Batch 2:  Loss: 0.6120 Accuracy: 60.38%
+Epoch 89, CIFAR-10 Batch 3:  Loss: 0.5144 Accuracy: 62.38%
+Epoch 89, CIFAR-10 Batch 4:  Loss: 0.5780 Accuracy: 60.34%
+Epoch 89, CIFAR-10 Batch 5:  Loss: 0.5559 Accuracy: 60.80%
+Epoch 90, CIFAR-10 Batch 1:  Loss: 0.5559 Accuracy: 61.58%
+Epoch 90, CIFAR-10 Batch 2:  Loss: 0.5844 Accuracy: 60.54%
+Epoch 90, CIFAR-10 Batch 3:  Loss: 0.5226 Accuracy: 62.50%
+Epoch 90, CIFAR-10 Batch 4:  Loss: 0.5800 Accuracy: 60.44%
+Epoch 90, CIFAR-10 Batch 5:  Loss: 0.5653 Accuracy: 61.02%
+Epoch 91, CIFAR-10 Batch 1:  Loss: 0.5772 Accuracy: 60.72%
+Epoch 91, CIFAR-10 Batch 2:  Loss: 0.6072 Accuracy: 59.76%
+Epoch 91, CIFAR-10 Batch 3:  Loss: 0.5381 Accuracy: 61.08%
+Epoch 91, CIFAR-10 Batch 4:  Loss: 0.6016 Accuracy: 60.64%
+Epoch 91, CIFAR-10 Batch 5:  Loss: 0.5254 Accuracy: 60.98%
+Epoch 92, CIFAR-10 Batch 1:  Loss: 0.5640 Accuracy: 61.20%
+Epoch 92, CIFAR-10 Batch 2:  Loss: 0.5743 Accuracy: 60.66%
+Epoch 92, CIFAR-10 Batch 3:  Loss: 0.5400 Accuracy: 61.08%
+Epoch 92, CIFAR-10 Batch 4:  Loss: 0.5592 Accuracy: 61.26%
+Epoch 92, CIFAR-10 Batch 5:  Loss: 0.5290 Accuracy: 60.98%
+Epoch 93, CIFAR-10 Batch 1:  Loss: 0.5304 Accuracy: 61.40%
+Epoch 93, CIFAR-10 Batch 2:  Loss: 0.5721 Accuracy: 59.88%
+Epoch 93, CIFAR-10 Batch 3:  Loss: 0.5378 Accuracy: 60.90%
+Epoch 93, CIFAR-10 Batch 4:  Loss: 0.5809 Accuracy: 60.44%
+Epoch 93, CIFAR-10 Batch 5:  Loss: 0.5202 Accuracy: 60.40%
+Epoch 94, CIFAR-10 Batch 1:  Loss: 0.5293 Accuracy: 61.74%
+Epoch 94, CIFAR-10 Batch 2:  Loss: 0.5491 Accuracy: 60.50%
+Epoch 94, CIFAR-10 Batch 3:  Loss: 0.4968 Accuracy: 61.16%
+Epoch 94, CIFAR-10 Batch 4:  Loss: 0.5834 Accuracy: 60.32%
+Epoch 94, CIFAR-10 Batch 5:  Loss: 0.4848 Accuracy: 61.00%
+Epoch 95, CIFAR-10 Batch 1:  Loss: 0.5109 Accuracy: 60.88%
+Epoch 95, CIFAR-10 Batch 2:  Loss: 0.5203 Accuracy: 61.24%
+Epoch 95, CIFAR-10 Batch 3:  Loss: 0.5012 Accuracy: 61.70%
+Epoch 95, CIFAR-10 Batch 4:  Loss: 0.5626 Accuracy: 60.54%
+Epoch 95, CIFAR-10 Batch 5:  Loss: 0.4893 Accuracy: 60.76%
+Epoch 96, CIFAR-10 Batch 1:  Loss: 0.5170 Accuracy: 61.18%
+Epoch 96, CIFAR-10 Batch 2:  Loss: 0.5069 Accuracy: 61.76%
+Epoch 96, CIFAR-10 Batch 3:  Loss: 0.4764 Accuracy: 62.18%
+Epoch 96, CIFAR-10 Batch 4:  Loss: 0.5436 Accuracy: 60.98%
+Epoch 96, CIFAR-10 Batch 5:  Loss: 0.4969 Accuracy: 60.86%
+Epoch 97, CIFAR-10 Batch 1:  Loss: 0.5348 Accuracy: 60.68%
+Epoch 97, CIFAR-10 Batch 2:  Loss: 0.5612 Accuracy: 61.00%
+Epoch 97, CIFAR-10 Batch 3:  Loss: 0.4847 Accuracy: 62.48%
+Epoch 97, CIFAR-10 Batch 4:  Loss: 0.5320 Accuracy: 60.86%
+Epoch 97, CIFAR-10 Batch 5:  Loss: 0.4744 Accuracy: 60.86%
+Epoch 98, CIFAR-10 Batch 1:  Loss: 0.5237 Accuracy: 61.00%
+Epoch 98, CIFAR-10 Batch 2:  Loss: 0.5578 Accuracy: 61.16%
+Epoch 98, CIFAR-10 Batch 3:  Loss: 0.4629 Accuracy: 62.74%
+Epoch 98, CIFAR-10 Batch 4:  Loss: 0.5271 Accuracy: 61.26%
+Epoch 98, CIFAR-10 Batch 5:  Loss: 0.4600 Accuracy: 62.06%
+Epoch 99, CIFAR-10 Batch 1:  Loss: 0.5489 Accuracy: 60.62%
+Epoch 99, CIFAR-10 Batch 2:  Loss: 0.5953 Accuracy: 59.68%
+Epoch 99, CIFAR-10 Batch 3:  Loss: 0.4859 Accuracy: 61.72%
+Epoch 99, CIFAR-10 Batch 4:  Loss: 0.5323 Accuracy: 61.16%
+Epoch 99, CIFAR-10 Batch 5:  Loss: 0.4810 Accuracy: 61.46%
+Epoch 100, CIFAR-10 Batch 1:  Loss: 0.5272 Accuracy: 61.30%
+Epoch 100, CIFAR-10 Batch 2:  Loss: 0.5398 Accuracy: 60.96%
+Epoch 100, CIFAR-10 Batch 3:  Loss: 0.4805 Accuracy: 62.04%
+Epoch 100, CIFAR-10 Batch 4:  Loss: 0.5621 Accuracy: 60.30%
+Epoch 100, CIFAR-10 Batch 5:  Loss: 0.5198 Accuracy: 60.94%
 </pre>
 </div>
 </div>
@@ -13470,7 +13570,7 @@ Epoch 100, CIFAR-10 Batch 5:  Loss: 0.4836 Accuracy: 84.90%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -13552,782 +13652,10 @@ Epoch 100, CIFAR-10 Batch 5:  Loss: 0.4836 Accuracy: 84.90%
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Testing Accuracy: 0.6109813451766968
+<pre>Testing Accuracy: 0.6099011480808259
 
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-ouGaCGZmZmYG7jk2MzMzMxswaXuOuwd38lLtOJYafTYoeljrCqZtA3XWjdYDaouASKUBgEVbcqGu
-0lRt3cVAwdIAvsGfVdrr5S3aOlC60Yi83Ib63mX3IpuZmZmVuefYzMzMzCxzcGxmZmZmlk3atIqe
-nFehKMX/g8arlQfW1ReqG7hWDLZr8FGiGMBXzJ0c0V3am+dazmXq9uS0iijlevTnOtQg26G6qT45
-ovk8x9WUi+gfnPZhZmZmZol7js3MzMzMsknbc7zDjHRpW8or0A3M0pb6UfvruliLu/oBbADKPbp9
-eVt/qfdVuZu3WHRPKk/NVn/fU/os0tOV+pH765biK0b3FceV21AU6c2XUJoyrq+4rMGD7voHpqHL
-11Bqn/uQzczMzOq559jMzMzMLJu8PcczU0/p9FKib1f+KNDdnTaq1qlMX19fLpP3led9y922fTl/
-ecvWrYPOV0zl1luXq5x+7sn7erpqdU7rTk99uRe6t3drXV09PbXGz5w5PW3Lx/VurTV+69ZcR25f
-OY+5dyC3OdW1pbe0r99TuZmZmZmVuefYzMzMzCxzcGxm44qklZJWjnU7zMxsapq0aRV9fZuLnwa2
-9fSky53ekz4TzOwppU4UKQk5LWJrKXViS29OP1A6fmbX4HSE/v4tqQi1Fe/UlVIhdphVnLd2vujP
-A+tKTejrq0wjp1rbu/LAwmlKdc6cWTtP3/S0r0jLoKt2XPHxZ8OmTelaNpcGKPaXJ5czMzMzM/cc
-m5mZmZllk7bneP2aLfmnWi9qfx6kt7U7DVLbVBo8N3166pEteow3b948sI88SK8Y0dfbW+t9LQbU
-FQP6oq80yi9Sb23fpnT8jjvUenu7cq+wukuD9KbNyHXlxTxKc61Fb3e+mjzArtQ7HFEM5EvbSuP4
-6Jme2tzTlc7dXfqVr99Q6mE2MzMzM/ccm9noU3KqpGslbZJ0l6SzJM1rccxLJV0saXU+5npJ75M0
-o0n5/SUtl3SHpC2S7pV0rqT9GpRdLikkPULSmyRdLWmjpBUdvGwzM5sAJm/P8erU89tdvsK+nFec
-e1/7SrnDM3P+bTGzWpT+3s6cMROoTe/WVZoDLvIKHDmdmb5NtR7nabn+Wbn3dlZpXrlp+YC+0vLW
-W3PO8UNrNwKwZXMpXzpfyIzpqYHd3bW2z5iZc6HzdG/dpd7o3q1FLnTOe55Wa8PsmZiNlU8Bbwbu
-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
-bY5FwH0V8CozqxHZ4d8C3gr8vZkNufu/lNq82d2V2RURkZ2o5lhEDjh33wHcBxxjZqfLCPH5AAAg
-AElEQVS2OeXC9HjTNNuvu/uN7v43wGvS4Zem2CBwO3CmmS2aTvsiItK5OjZzLCIHvc8Bfw38TzN7
-eVanbGZLgPeXztkjZrYSuNfdW7PNR6bH4dKxjwL/AnzOzC52951KQcxsIXCiu09rcJ4565j53KgN
-P0REDikdOzhevykmynlpV7rsI6vO2SWWzcnZmn59Npvl+USNdE6UKyxYWvwluNYVxyqV+FKW5v3Q
-qMd14+MxEb/RKNrsSfezSjEZaNGyKKfId+lrFP1rNHee31QtlVV0pzKKbGJRpTTxLyu5yO7daJR2
-96urrEJm1UeAFwAvAW41s6uIdY5fCSwF/tbdr9uL9l4H/LGZXUdkpbcQayK/iJhg9/HsRHf/XBpM
-vxm4z8yy1TQWEesiPwv4V+CN+/QMRUTkkNOxg2MRObi5+7iZPQd4F/A7RG1wHbiVWKv4y3vZ5JeB
-HuBpwEpic5A1wFeAv3P321ru/xYz+y4xAP4tYvLfZmKQ/D+BL07zqWWWr1q1ipUr2y5mISIiu7Fq
-1SqA5Qf6vlbOdIqIyMwwszGgSgz2RQ5G2UY17ZZTFDkYPAFouHvPbs+cQcoci4jsH7fB5Osgi8y2
-bHdHvUblYDXFDqT7lVarEBERERFJNDgWEREREUk0OBYRERERSTQ4FhERERFJNDgWEREREUm0lJuI
-iIiISKLMsYiIiIhIosGxiIiIiEiiwbGIiIiISKLBsYiIiIhIosGxiIiIiEiiwbGIiIiISKLBsYiI
-iIhIosGxiIiIiEiiwbGIyB4ws2PN7HNmttbMxsxstZl93MwW7mU7i9J1q1M7a1O7x+6vvsvhYSZe
-o2Z2tZn5FP969+dzkM5lZq8ws0+Y2U/NbHt6PX1xmm3NyM/jydRmohERkU5mZicDPwOWAt8E7gTO
-Bd4OPN/Mnu7um/agncWpndOAHwNfAVYAbwAuMrOnuvv9++dZSCebqddoyeWTHK/vU0flcPY+4AnA
-IPAI8bNvr+2H1/ouNDgWEdm9TxE/iN/m7p/IDprZR4F3An8NvHEP2vkgMTD+qLtfUmrnbcDfp/s8
-fwb7LYePmXqNAuDul810B+Ww905iUHwvcD7wk2m2M6Ov9XbM3fflehGRjpayFPcCq4GT3b1Zis0F
-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
-"
-width=355
-height=319
->
-</div>
-
 </div>
 
 </div>
